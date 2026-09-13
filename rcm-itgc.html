@@ -1751,7 +1751,7 @@ function cleanRCMText(value){
     .replaceAll('ดำเนินการตรวจสอบ','ตรวจสอบ').replaceAll('ดำเนินการทดสอบ','ทดสอบ')
     .replaceAll('ดำเนินการ','ทำ').replaceAll('จัดทำ','ทำ').replaceAll('ทำการตรวจสอบ','ตรวจสอบ')
     .replaceAll('สอบทาน','ตรวจ').replaceAll('ภายหลัง','หลัง').replaceAll('ดังกล่าว','นี้')
-    .replaceAll('โดยปราศจาก','โดยไม่มี').replaceAll('วิธีการตรวจโดย','ตรวจโดย')
+    .replaceAll('โดยปราศจาก','โดยไม่มี').replaceAll('วิธีการตรวจสอบโดยการตรวจพิจารณา','ตรวจเนื้อหาโดย').replaceAll('วิธีการตรวจสอบโดย','ตรวจโดย').replaceAll('วิธีการตรวจโดย','ตรวจโดย').replaceAll('ทำประเมิน','ประเมิน').replaceAll('ทำทางวินัย','จัดการตามระเบียบวินัย')
     .replace(/เกณฑ์วัดผล(?:คือ|:)?/g,'เกณฑ์ตัดสิน:').replace(/หรือไม่(?=\s*[?？]?$)/g,'ไหม')
     .replace(/ผู้ตรวจ(?!สอบ)/g,'ผู้ตรวจสอบ');
 }
@@ -1759,14 +1759,14 @@ function cellText(row,col){const cell=row.querySelector('td[data-col="'+col+'"]'
 function splitRisk(value){
   let text=cleanRCMText(value),cause='',impact='';
   const causeMatch=text.match(/\s*\(สาเหตุ:\s*(.*?)\)\s*$/);if(causeMatch){cause=causeMatch[1];text=text.replace(causeMatch[0],'').trim()}
-  const impactMatch=text.match(/^(.*?)(?:ส่งผลให้|ทำให้เกิด)(.*)$/);if(impactMatch){text=impactMatch[1].trim();impact=impactMatch[2].trim()}
+  const impactMatch=text.match(/^(.*?)(?:ส่งผลให้|ทำให้เกิด|ทำให้)(.*)$/);if(impactMatch){text=impactMatch[1].trim();impact=impactMatch[2].trim()}
   return {event:text,cause:cause,impact:impact||'ผลกระทบให้พิจารณาจากระบบ ข้อมูล และงานธุรกิจที่อยู่ในขอบเขตตรวจสอบ'};
 }
 function escapeHTML(value){return String(value||'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]))}
 function fieldText(value){return value?escapeHTML(value):'<span class="empty-field">ยังไม่มีข้อมูล</span>'}
 function formatTest(value){
   const text=cleanRCMText(value);if(!text)return '<p class="field-text empty-field">ยังไม่มีวิธีตรวจ</p>';
-  let parts=text.split(/(?=จาก(?:รายงาน|เอกสาร|ระบบ|บันทึก|ทะเบียน|รายการ|ข้อมูล|แฟ้ม|การสอบถาม|ค่าคอนฟิก))/).map(x=>x.trim()).filter(Boolean);
+  let parts=text.split(/(?=จาก(?:รายงาน|เอกสาร|ระบบ|บันทึก|ทะเบียน|รายการ|ข้อมูล|แฟ้ม|การสอบถาม|ค่าคอนฟิก))/).map(x=>x.trim()).filter(x=>x.length>=18);
   if(parts.length===1)parts=[text];
   return '<ol class="test-list">'+parts.map(part=>{const safe=escapeHTML(part).replace(/(เกณฑ์ตัดสิน:)/g,'<span class="criteria">$1</span>');return '<li>'+safe+'</li>'}).join('')+'</ol>';
 }
