@@ -344,6 +344,16 @@
   .card-support .card-field:first-child { border-right: 1px solid var(--line); }
   .card-support .evidence .field-label { color: #7b4fa0; }
 
+
+  .edit-hint { color: #aebfd0; font-size: 9px; font-weight: 650; }
+  .editable-value { min-height: 23px; margin: -5px -7px; padding: 5px 7px; border: 1px solid transparent; border-radius: 7px; cursor: text; transition: background .15s,border-color .15s,box-shadow .15s; }
+  .editable-value:hover { background: #f4f8fc; border-color: #cbd9e6; }
+  .editable-value:focus { outline: 0; background: #fffdf4; border-color: var(--gold); box-shadow: 0 0 0 3px rgba(227,174,67,.16); }
+  .editable-value:empty::before { content: attr(data-placeholder); color: #8a98a6; font-style: italic; pointer-events: none; }
+  .formatted-test { color: #273d52; font-size: 12px; line-height: 1.68; }
+  .activity-name-edit { display: inline; margin-left: 6px; padding: 3px 5px; border: 1px solid transparent; border-radius: 5px; color: #d9e5f0; cursor: text; }
+  .activity-name-edit:hover,.activity-name-edit:focus { outline: 0; border-color: rgba(255,255,255,.35); background: rgba(255,255,255,.08); }
+  .card-rating-select { width: 100%; min-height: 34px; padding: 6px 8px; border: 1px solid #cbd6df; border-radius: 7px; background: #fff; color: var(--ink); font: inherit; font-size: 11px; }
   .card-result { border-top: 1px solid var(--line); background: #f8fbfe; }
   .result-heading { display: flex; justify-content: space-between; gap: 12px; padding: 11px 16px; color: var(--deep); font-size: 11px; font-weight: 850; }
   .result-heading span { color: var(--muted); font-size: 10px; font-weight: 600; }
@@ -390,7 +400,7 @@
 <section class="rcm-reading-guide" aria-labelledby="rcmGuideTitle">
   <div class="guide-heading">
     <div><span class="guide-kicker">วิธีอ่าน RCM (How to read the RCM)</span><h2 id="rcmGuideTitle">อ่านจากความเสี่ยง ไปสู่ข้อสรุปการตรวจสอบ</h2></div>
-    <p>เลือกกิจกรรมด้านล่าง แล้วอ่านข้อมูลจากซ้ายไปขวา แต่ละแถวคือหนึ่งจุดควบคุมที่ผู้ตรวจสอบควรทำความเข้าใจและทดสอบ</p>
+    <p>เลือกกิจกรรมด้านล่าง แล้วอ่านข้อมูลจากซ้ายไปขวา คลิกข้อความในแต่ละช่องเพื่อแก้ไข และกดบันทึกสำเนาเมื่อต้องการเก็บงาน</p>
   </div>
   <div class="guide-steps">
     <article><b>01</b><div><strong>สิ่งที่อาจเกิดขึ้น (Risk)</strong><span>ดูเหตุการณ์ที่อาจทำให้ระบบ ข้อมูล หรือการทำงานของธุรกิจเสียหาย</span></div></article>
@@ -1751,7 +1761,7 @@ function showActivity(index){if(!activityList.length)return;activeActivityIndex=
 function stepActivity(direction){showActivity(activeActivityIndex+direction)}
 
 function simplifyThai(root){const rules=[['เมื่อใด','เมื่อไหร่'],['ใดบ้าง','อะไรบ้าง'],['ระบบใด','ระบบไหน'],['รายการใด','รายการไหน'],['ข้อใด','ข้อไหน'],['ครั้งใด','ครั้งไหน'],['ที่ใด','ที่ไหน'],['ผู้ใด','ใคร'],['อย่างใด','แบบไหน'],['ผู้ตรวจทาน','ผู้ทบทวน'],['ทราบ','รู้'],['ดำเนินการตรวจสอบ','ตรวจสอบ'],['ดำเนินการทดสอบ','ทดสอบ'],['ดำเนินการ','ทำ'],['ดำเนินงาน','ทำงาน'],['จัดทำ','ทำ'],['สอบทาน','ตรวจ'],['ดังกล่าว','นี้'],['ภายหลัง','หลังจาก'],['เนื่องจาก','เพราะ'],['ปฏิบัติงาน','ทำงาน']];const walker=document.createTreeWalker(root,NodeFilter.SHOW_TEXT);const nodes=[];while(walker.nextNode())nodes.push(walker.currentNode);nodes.forEach(node=>{if(node.parentElement&&node.parentElement.closest('script,style,textarea,input'))return;let value=node.nodeValue;rules.forEach(([from,to])=>value=value.replaceAll(from,to));value=value.replace(/หรือไม่(?=\s*[?？]?$)/g,'ไหม');value=value.replace(/ผู้ตรวจ(?!สอบ)/g,'ผู้ตรวจสอบ');node.nodeValue=value})}
-document.addEventListener('DOMContentLoaded',function(){simplifyThai(document.body);buildActivityTabs();renderControlCards();});
+document.addEventListener('DOMContentLoaded',function(){simplifyThai(document.body);setupCardEditing();buildActivityTabs();renderControlCards();});
 document.addEventListener('keydown',function(e){if((e.ctrlKey||e.metaKey)&&e.key==='z'){e.preventDefault();undo();}if((e.ctrlKey||e.metaKey)&&e.key==='y'){e.preventDefault();redo();}if((e.ctrlKey||e.metaKey)&&e.key==='f'){e.preventDefault();document.getElementById('searchInput').focus();}});
 
 function cleanRCMText(value){
@@ -1768,7 +1778,7 @@ function splitRisk(value){
   let text=cleanRCMText(value),cause='',impact='';
   const causeMatch=text.match(/\s*\(สาเหตุ:\s*(.*?)\)\s*$/);if(causeMatch){cause=causeMatch[1];text=text.replace(causeMatch[0],'').trim()}
   const impactMatch=text.match(/^(.*?)(?:ส่งผลให้|ทำให้เกิด|ทำให้)(.*)$/);if(impactMatch){text=impactMatch[1].trim();impact=impactMatch[2].trim()}
-  return {event:text,cause:cause,impact:impact||'ผลกระทบให้พิจารณาจากระบบ ข้อมูล และงานธุรกิจที่อยู่ในขอบเขตตรวจสอบ'};
+  return {event:text,cause:cause,impact:impact};
 }
 function escapeHTML(value){return String(value||'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]))}
 function fieldText(value){return value?escapeHTML(value):'<span class="empty-field">ยังไม่มีข้อมูล</span>'}
@@ -1778,20 +1788,36 @@ function formatTest(value){
   if(parts.length===1)parts=[text];
   return '<ol class="test-list">'+parts.map(part=>{const safe=escapeHTML(part).replace(/(เกณฑ์ตัดสิน:)/g,'<span class="criteria">$1</span>');return '<li>'+safe+'</li>'}).join('')+'</ol>';
 }
+
+function editableField(value,col,placeholder,extra){return '<p class="field-text editable-value" contenteditable="true" data-col="'+col+'" '+(extra||'')+' data-placeholder="'+escapeHTML(placeholder||'คลิกเพื่อเพิ่มข้อมูล')+'">'+escapeHTML(value||'')+'</p>'}
+function ratingOptions(value){const options=[['','-- ยังไม่ได้ประเมิน --'],['Ad-hoc','Ad-hoc — ยังไม่มีมาตรฐาน'],['Developing','Developing — มีขั้นตอนแต่ยังไม่สม่ำเสมอ'],['Standard','Standard — มีมาตรฐานและทำสม่ำเสมอ'],['Leading','Leading — มีการวัดผลและปรับปรุงต่อเนื่อง']];return '<select class="card-rating-select" data-col="11">'+options.map(([v,label])=>'<option value="'+v+'"'+(v===value?' selected':'')+'>'+label+'</option>').join('')+'</select>'}
+function sourceRowForCard(card){const index=Number(card.dataset.sourceIndex);return document.querySelectorAll('tbody tr[data-act]')[index]||null}
+function syncCardEdit(target){
+  const card=target.closest('.control-card'),row=card&&sourceRowForCard(card);if(!row)return;
+  const col=target.dataset.col;
+  if(target.classList.contains('activity-name-edit')){const name=cleanRCMText(target.textContent),code=target.dataset.activity;const first=document.querySelector('tbody tr[data-act="'+code+'"] td[data-col="1"]');if(first)first.textContent=code+': '+name;const item=activityList.find(x=>x.code===code);if(item)item.name=code+': '+name;document.getElementById('activityTitle').textContent=name;document.querySelectorAll('.activity-name-edit[data-activity="'+code+'"]').forEach(x=>{if(x!==target)x.textContent=name});const tab=Array.from(document.querySelectorAll('.activity-tab')).find(x=>activityList[Number(x.dataset.index)]&&activityList[Number(x.dataset.index)].code===code);if(tab)tab.title=code+': '+name;return}
+  if(col==='2'){const event=card.querySelector('[data-risk-part="event"]').innerText.trim(),impact=card.querySelector('[data-risk-part="impact"]').innerText.trim(),causeNode=card.querySelector('[data-risk-part="cause"]'),cause=causeNode?causeNode.innerText.trim():'',cell=row.querySelector('td[data-col="2"]');if(cell)cell.textContent=event+(impact?' ส่งผลให้ '+impact:'')+(cause?' (สาเหตุ: '+cause+')':'');return}
+  const cell=row.querySelector('td[data-col="'+col+'"]');if(!cell)return;
+  if(target.matches('select')){const source=cell.querySelector('select');if(source){source.value=target.value;source.querySelectorAll('option').forEach(o=>o.toggleAttribute('selected',o.value===target.value))}return}
+  cell.textContent=target.innerText.trim();
+}
+function setupCardEditing(){const host=document.getElementById('controlCards');if(!host||host.dataset.editReady)return;host.dataset.editReady='true';host.addEventListener('input',e=>{const target=e.target.closest('.editable-value,.activity-name-edit');if(target)syncCardEdit(target)});host.addEventListener('change',e=>{if(e.target.matches('.card-rating-select'))syncCardEdit(e.target)})}
+
 function renderControlCards(){
   const host=document.getElementById('controlCards');if(!host||!activityList.length)return;
   const code=activityList[activeActivityIndex].code,q=(document.getElementById('searchInput').value||'').toLowerCase().trim();
-  const rows=Array.from(document.querySelectorAll('tbody tr[data-act="'+code+'"]')).filter(row=>{if(!q)return true;return cleanRCMText(row.textContent).toLowerCase().includes(q)});
+  const allRows=Array.from(document.querySelectorAll('tbody tr[data-act]'));const rows=allRows.filter(row=>row.dataset.act===code).filter(row=>{if(!q)return true;return cleanRCMText(row.textContent).toLowerCase().includes(q)});
   host.innerHTML='';
   rows.forEach((row,index)=>{
+    const sourceIndex=allRows.indexOf(row);
     const sourceNo=cellText(row,0),activity=(activityList[activeActivityIndex].name||code).replace(code+':','').trim(),risk=splitRisk(cellText(row,2)),control=cellText(row,3),policy=cellText(row,4),procedure=cellText(row,5),kri=cellText(row,6),test=cellText(row,7),evidence=cellText(row,8),question=cellText(row,9),controlInPlace=cellText(row,10),owner=cellText(row,12),ratingSelect=row.querySelector('td[data-col="11"] select'),rating=ratingSelect&&ratingSelect.value?cleanRCMText(ratingSelect.selectedOptions[0].textContent):'';
-    const card=document.createElement('article');card.className='control-card';
-    card.innerHTML='<header class="control-card-head"><div class="control-id"><b>'+String(sourceNo||index+1).padStart(3,'0')+'</b><span>จุดควบคุม (Control Point)</span></div><span class="control-code">'+escapeHTML(code)+' · '+escapeHTML(activity)+'</span></header>'+
-      '<div class="risk-story"><div class="risk-part"><div class="field-label"><i class="dot"></i>เหตุการณ์ที่อาจเกิดขึ้น (Risk Event)</div><p class="field-text">'+fieldText(risk.event)+'</p>'+(risk.cause?'<p class="field-text"><strong>สาเหตุ:</strong> '+escapeHTML(risk.cause)+'</p>':'')+'</div><div class="risk-part"><div class="field-label"><i class="dot"></i>ผลกระทบ (Impact)</div><p class="field-text">'+fieldText(risk.impact)+'</p></div></div>'+
-      '<div class="card-core"><section class="card-field control"><div class="field-label"><i class="dot"></i>จุดควบคุมที่ควรมี (Expected Control)</div><p class="field-text">'+fieldText(control)+'</p></section><section class="card-field test"><div class="field-label"><i class="dot"></i>วิธีตรวจและเกณฑ์ตัดสิน (Audit Test)</div>'+formatTest(test)+'</section></div>'+
-      '<div class="card-support"><section class="card-field evidence"><div class="field-label"><i class="dot"></i>หลักฐานหรือรายงานที่ควรขอ (Evidence)</div><p class="field-text">'+fieldText(evidence)+'</p></section><section class="card-field"><div class="field-label"><i class="dot"></i>คำถามสำหรับสัมภาษณ์ (Interview Question)</div><p class="field-text">'+fieldText(question)+'</p></section></div>'+
-      '<details class="reference-details"><summary>ดูนโยบาย ขั้นตอนทำงาน และตัวชี้วัดที่เกี่ยวข้อง</summary><div class="reference-grid"><div><div class="field-label">นโยบาย (Policy)</div><p class="field-text">'+fieldText(policy)+'</p></div><div><div class="field-label">ขั้นตอนทำงาน (Procedure)</div><p class="field-text">'+fieldText(procedure)+'</p></div><div><div class="field-label">ตัวชี้วัดความเสี่ยง (KRI)</div><p class="field-text">'+fieldText(kri)+'</p></div></div></details>'+
-      '<section class="card-result"><div class="result-heading">ข้อมูลสำหรับสรุปผลตรวจ (Audit Result)<span>คงช่องข้อมูลตาม RCM ต้นฉบับ</span></div><div class="result-grid"><div><div class="field-label">การควบคุมที่พบจริง (Control in Place)</div><p class="field-text">'+fieldText(controlInPlace)+'</p></div><div><div class="field-label">ผลประเมินการควบคุม (Control Rating)</div>'+(rating?'<span class="rating-value">'+escapeHTML(rating)+'</span>':'<span class="rating-value">ยังไม่ได้ประเมิน</span>')+'</div><div><div class="field-label">เจ้าของกระบวนการ (Process Owner)</div><p class="field-text">'+fieldText(owner)+'</p></div></div></section>';
+    const card=document.createElement('article');card.className='control-card';card.dataset.sourceIndex=sourceIndex;
+    card.innerHTML='<header class="control-card-head"><div class="control-id"><b>'+String(sourceNo||index+1).padStart(3,'0')+'</b><span>จุดควบคุม (Control Point)<small class="edit-hint"> · คลิกข้อความเพื่อแก้ไข</small></span></div><span class="control-code">'+escapeHTML(code)+' · <span class="activity-name-edit" contenteditable="true" data-activity="'+escapeHTML(code)+'">'+escapeHTML(activity)+'</span></span></header>'+
+      '<div class="risk-story"><div class="risk-part"><div class="field-label"><i class="dot"></i>เหตุการณ์ที่อาจเกิดขึ้น (Risk Event)</div>'+editableField(risk.event,2,'ระบุเหตุการณ์ที่อาจเกิดขึ้น','data-risk-part="event"')+(risk.cause?'<div class="risk-cause"><div class="field-label">สาเหตุ (Cause)</div>'+editableField(risk.cause,2,'ระบุสาเหตุ','data-risk-part="cause"')+'</div>':'')+'</div><div class="risk-part"><div class="field-label"><i class="dot"></i>ผลกระทบ (Impact)</div>'+editableField(risk.impact,2,'ระบุผลกระทบต่อระบบ ข้อมูล หรือธุรกิจ','data-risk-part="impact"')+'</div></div>'+
+      '<div class="card-core"><section class="card-field control"><div class="field-label"><i class="dot"></i>จุดควบคุมที่ควรมี (Expected Control)</div>'+editableField(control,3,'ระบุจุดควบคุมที่ควรมี')+'</section><section class="card-field test"><div class="field-label"><i class="dot"></i>วิธีตรวจและเกณฑ์ตัดสิน (Audit Test)</div><div class="editable-value formatted-test" contenteditable="true" data-col="7" data-placeholder="ระบุวิธีตรวจและเกณฑ์ตัดสิน">'+formatTest(test)+'</div></section></div>'+
+      '<div class="card-support"><section class="card-field evidence"><div class="field-label"><i class="dot"></i>หลักฐานหรือรายงานที่ควรขอ (Evidence)</div>'+editableField(evidence,8,'ระบุชื่อหลักฐานหรือรายงาน')+'</section><section class="card-field"><div class="field-label"><i class="dot"></i>คำถามสำหรับสัมภาษณ์ (Interview Question)</div>'+editableField(question,9,'ระบุคำถามสำหรับสัมภาษณ์')+'</section></div>'+
+      '<details class="reference-details"><summary>ดูนโยบาย ขั้นตอนทำงาน และตัวชี้วัดที่เกี่ยวข้อง</summary><div class="reference-grid"><div><div class="field-label">นโยบาย (Policy)</div>'+editableField(policy,4,'ระบุนโยบายที่เกี่ยวข้อง')+'</div><div><div class="field-label">ขั้นตอนทำงาน (Procedure)</div>'+editableField(procedure,5,'ระบุขั้นตอนทำงาน')+'</div><div><div class="field-label">ตัวชี้วัดความเสี่ยง (KRI)</div>'+editableField(kri,6,'ระบุตัวชี้วัดความเสี่ยง')+'</div></div></details>'+
+      '<section class="card-result"><div class="result-heading">ข้อมูลสำหรับสรุปผลตรวจ (Audit Result)<span>คลิกข้อความเพื่อแก้ไข</span></div><div class="result-grid"><div><div class="field-label">การควบคุมที่พบจริง (Control in Place)</div>'+editableField(controlInPlace,10,'ระบุการควบคุมที่พบจากการตรวจ')+'</div><div><div class="field-label">ผลประเมินการควบคุม (Control Rating)</div>'+ratingOptions(ratingSelect?ratingSelect.value:'')+'</div><div><div class="field-label">เจ้าของกระบวนการ (Process Owner)</div>'+editableField(owner,12,'ระบุหน่วยงานหรือผู้รับผิดชอบ')+'</div></div></section>';
     host.appendChild(card);
   });
   if(!rows.length)host.innerHTML='<div class="no-results">ไม่พบรายการที่ตรงกับคำค้นในกิจกรรมนี้</div>';
