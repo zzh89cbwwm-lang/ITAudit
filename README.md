@@ -7,6 +7,6 @@
 ## ไฟล์หลัก
 
 - `index.html` — คู่มือหลัก
-- `RCM_ITGC_GeneralBusiness_UNVS.html` — ตารางความเสี่ยงและจุดควบคุม
+- `rcm-itgc.html` — ตารางความเสี่ยงและจุดควบคุม
 - `IT_Audit_Glossary_TH.md` — คลังคำศัพท์ฉบับข้อความ
 - `IT_Audit_Overview_Map_TH.md` — ภาพรวมขอบเขตงานตรวจ
