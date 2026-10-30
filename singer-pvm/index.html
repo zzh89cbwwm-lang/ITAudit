@@ -3,332 +3,668 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>SINGER PVM Training Book</title>
+<meta name="theme-color" content="#111111">
+<title>SINGER PVM — Training Playbook</title>
 <style>
 :root{
-  --paper:#F5F2EB;--sheet:#FFFDF8;--ink:#20201E;--muted:#6E6962;--line:#D8D1C6;
-  --rust:#B64C36;--rust2:#8E392B;--dark:#292927;--gray:#5E5A54;--soft:#EEE9E1;
-  --shadow:0 16px 50px rgba(30,28,25,.08);
+  --bg:#ece9e3;
+  --paper:#fbfaf7;
+  --ink:#161616;
+  --muted:#74706a;
+  --line:#d8d3ca;
+  --red:#d71920;
+  --red-dark:#9d1117;
+  --black:#111111;
+  --soft:#f2efe9;
+  --white:#ffffff;
+  --green:#2f6f5f;
+  --amber:#a66f16;
+  --shadow:0 24px 60px rgba(20,18,14,.08);
 }
 *{box-sizing:border-box}
-html,body{margin:0;min-height:100%;background:var(--paper);color:var(--ink);font-family:Tahoma,"Noto Sans Thai","Sarabun",sans-serif}
+html,body{margin:0;min-height:100%;background:var(--bg);color:var(--ink);font-family:"Aptos","IBM Plex Sans Thai","Noto Sans Thai","Sarabun","Tahoma",sans-serif}
 body{overflow-x:hidden}
-a{color:inherit}
-.topbar{position:sticky;top:0;z-index:50;background:rgba(32,32,30,.98);color:#fff;border-bottom:1px solid #44433f}
-.topinner{max-width:1500px;margin:auto;padding:11px 20px;display:flex;align-items:center;gap:16px}
-.brand{font-weight:900;letter-spacing:.06em;white-space:nowrap}.brand span{color:#D86A51}
-.topnav{display:flex;gap:6px;flex-wrap:wrap}.topnav button{background:transparent;border:1px solid #5c5954;color:#fff;border-radius:999px;padding:7px 10px;font-size:12px;cursor:pointer}
-.topnav button:hover{background:var(--rust);border-color:var(--rust)}
-.spacer{flex:1}.counter{font-size:12px;color:#d9d6d0;white-space:nowrap}
-.progress{height:3px;background:#3b3935}.progress>div{height:100%;width:0;background:var(--rust);transition:.25s}
-.stage{max-width:1500px;margin:0 auto;padding:24px 20px 92px}
-.page{display:none;min-height:calc(100vh - 155px);background:var(--sheet);border:1px solid var(--line);box-shadow:var(--shadow);padding:42px}
-.page.active{display:block}
-.eyebrow{font-size:11px;letter-spacing:.13em;text-transform:uppercase;font-weight:900;color:var(--muted)}
-h1{font-size:clamp(38px,5vw,68px);line-height:1.04;letter-spacing:-.03em;margin:9px 0 16px}
-h2{font-size:30px;margin:0 0 18px} h3{margin:0 0 8px;font-size:20px}
-p{line-height:1.7}.lead{font-size:18px;color:var(--muted);max-width:1050px}.accent{color:var(--rust)}
-.grid{display:grid;gap:12px}.g4{grid-template-columns:repeat(4,1fr)}.g3{grid-template-columns:repeat(3,1fr)}.g2{grid-template-columns:1fr 1fr}
-.card{background:#fff;border:1px solid var(--line);padding:18px}.card .k{font-size:11px;color:var(--rust);font-weight:900;letter-spacing:.08em}.card p{font-size:13px;color:var(--muted);margin:5px 0 0}
-.phasebar{display:grid;grid-template-columns:3fr 2fr 5fr 2fr;margin:20px 0}.phase{padding:14px 16px;color:#fff}.contract{background:var(--dark)}.install{background:var(--gray)}.operation{background:var(--rust)}.settlement{background:var(--rust2)}
-.phase b{display:block}.phase small{opacity:.86}
-.workflow{display:grid;grid-template-columns:repeat(11,minmax(150px,1fr));gap:7px;overflow-x:auto;padding-bottom:7px}
-.wstep{min-width:150px;min-height:150px;color:#fff;padding:13px;text-decoration:none;display:flex;flex-direction:column;gap:7px;cursor:pointer}
-.wstep:hover{transform:translateY(-2px)}.wstep .num{width:29px;height:29px;border-radius:50%;background:#ffffff2d;display:grid;place-items:center;font-weight:900}.wstep small{margin-top:auto;opacity:.85}
-.note{border-left:5px solid var(--rust);background:#FFF5EF;padding:14px 16px;margin:15px 0;font-size:13px}
-.process-top{display:grid;grid-template-columns:1.1fr .9fr;gap:18px;margin-top:18px}
-.process-title{background:#fff;border:1px solid var(--line);padding:22px}.process-title .stepbig{font-size:58px;font-weight:900;line-height:1;color:var(--rust)}
-.remember{background:var(--dark);color:#fff;padding:22px}.remember small{opacity:.7}.remember strong{display:block;font-size:24px;line-height:1.4;margin-top:8px}
-.columns{display:grid;grid-template-columns:1.25fr 1fr 1fr;gap:12px;margin-top:14px}.box{background:#fff;border:1px solid var(--line);padding:18px}.box h4{margin:0 0 10px;font-size:12px;text-transform:uppercase;letter-spacing:.07em;color:var(--muted)}
-.box ol,.box ul{margin:0;padding-left:20px;font-size:13px}.box li{margin:6px 0}.tags{display:flex;flex-wrap:wrap;gap:6px}.tag{border:1px solid var(--line);padding:5px 8px;border-radius:999px;font-size:11px;background:#faf7f1}
-.account{background:#F1EDE6;border-left:4px solid var(--rust);padding:13px;font-size:12px;white-space:pre-line}
-table{width:100%;border-collapse:collapse;background:#fff;font-size:12px;margin:10px 0 18px}th,td{border:1px solid var(--line);padding:9px;text-align:left;vertical-align:top}th{background:var(--soft)}
-.legend{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}.legend strong{font-size:28px;color:var(--rust)}
-.docgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}.doc{background:#fff;border:1px solid var(--line);padding:17px}.doc b{display:block;margin-bottom:5px}.doc small{color:var(--muted)}
-.bottomnav{position:fixed;left:0;right:0;bottom:0;z-index:60;background:rgba(245,242,235,.96);backdrop-filter:blur(8px);border-top:1px solid var(--line)}
-.bottominner{max-width:1500px;margin:auto;padding:10px 20px;display:grid;grid-template-columns:1fr auto 1fr;gap:10px;align-items:center}
-.btn{border:1px solid var(--ink);background:var(--sheet);padding:10px 14px;cursor:pointer;font-weight:700;font-size:12px}.btn.primary{background:var(--ink);color:#fff}.btn.next{justify-self:end}.btn:disabled{opacity:.35;cursor:not-allowed}
-.pills{display:flex;gap:4px;align-items:center;justify-content:center;flex-wrap:wrap}.pill{width:8px;height:8px;border-radius:50%;border:1px solid #928c84;background:transparent;cursor:pointer}.pill.active{background:var(--rust);border-color:var(--rust);transform:scale(1.25)}
-.page-label{font-size:11px;color:var(--muted);text-align:center;margin-top:8px}
-.kbd{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;background:#eee8df;border:1px solid var(--line);padding:2px 5px;border-radius:4px;font-size:11px}
-@media(max-width:1000px){.g4,.g3,.docgrid{grid-template-columns:1fr 1fr}.columns,.process-top{grid-template-columns:1fr}.page{padding:28px}}
-@media(max-width:650px){.g4,.g3,.g2,.legend,.docgrid,.columns{grid-template-columns:1fr}.page{padding:20px}.stage{padding:12px 10px 92px}.topinner{padding:10px}.topnav{display:none}.counter{font-size:10px}.bottominner{padding:9px 10px}.phasebar{grid-template-columns:1fr 1fr}.btn{padding:9px 10px}}
-@media print{.topbar,.bottomnav{display:none}.stage{padding:0}.page{display:block!important;min-height:auto;box-shadow:none;page-break-after:always;border:0}}
+button,a{font:inherit}
+button{cursor:pointer}
+.shell{min-height:100vh;display:grid;grid-template-columns:260px 1fr}
+.sidebar{position:sticky;top:0;height:100vh;background:var(--black);color:#fff;padding:28px 22px 20px;display:flex;flex-direction:column;border-right:1px solid #2b2b2b;z-index:20}
+.brand{display:flex;align-items:center;gap:10px;margin-bottom:34px}
+.brand-mark{width:12px;height:12px;background:var(--red);border-radius:2px}
+.brand-name{font-size:15px;font-weight:900;letter-spacing:.08em}
+.brand-sub{font-size:10px;color:#9e9e9e;letter-spacing:.14em;text-transform:uppercase;margin-top:3px}
+.side-label{font-size:9px;text-transform:uppercase;letter-spacing:.16em;color:#7c7c7c;margin:0 0 10px}
+.chapter-list{display:flex;flex-direction:column;gap:4px}
+.chapter{appearance:none;border:0;background:transparent;color:#bdbdbd;text-align:left;padding:10px 12px;border-radius:7px;display:grid;grid-template-columns:28px 1fr;gap:8px;align-items:center;transition:.18s}
+.chapter:hover{background:#1b1b1b;color:#fff}
+.chapter.active{background:#fff;color:#111}
+.chapter .n{font-size:10px;font-weight:900;opacity:.55}
+.chapter .t{font-size:12px;font-weight:700}
+.chapter.active .n{color:var(--red);opacity:1}
+.side-spacer{flex:1}
+.side-note{border-top:1px solid #2c2c2c;padding-top:16px;font-size:10px;color:#8f8f8f;line-height:1.55}
+.side-note strong{color:#fff}
+.main{min-width:0}
+.topbar{height:64px;position:sticky;top:0;z-index:15;background:rgba(236,233,227,.92);backdrop-filter:blur(16px);border-bottom:1px solid var(--line);display:flex;align-items:center;justify-content:space-between;padding:0 30px}
+.topbar-left{display:flex;align-items:center;gap:12px}
+.kicker{font-size:10px;letter-spacing:.15em;text-transform:uppercase;color:var(--muted);font-weight:800}
+.page-counter{font-size:12px;font-weight:800}
+.progress-line{position:absolute;left:0;right:0;bottom:0;height:2px;background:#d8d3ca}
+.progress-line>div{height:100%;background:var(--red);width:0;transition:.25s ease}
+.top-actions{display:flex;gap:8px}
+.top-btn{border:1px solid var(--line);background:rgba(255,255,255,.45);padding:7px 10px;border-radius:999px;font-size:11px;color:#45413d}
+.top-btn:hover{background:#fff}
+.canvas{padding:30px 34px 110px}
+.slide{display:none;max-width:1360px;min-height:calc(100vh - 204px);margin:0 auto;background:var(--paper);border:1px solid var(--line);box-shadow:var(--shadow);position:relative;overflow:hidden}
+.slide.active{display:block;animation:fade .18s ease}
+@keyframes fade{from{opacity:.35;transform:translateY(4px)}to{opacity:1;transform:none}}
+.slide-pad{padding:54px 58px}
+.slide-index{position:absolute;right:26px;top:20px;font-size:84px;font-weight:900;line-height:1;color:#ece8e1;letter-spacing:-.06em;pointer-events:none}
+.eyebrow{font-size:10px;letter-spacing:.16em;text-transform:uppercase;font-weight:900;color:var(--red);margin-bottom:12px}
+h1{font-size:clamp(44px,5.2vw,80px);line-height:.98;letter-spacing:-.045em;margin:0;max-width:1050px}
+h2{font-size:30px;line-height:1.1;letter-spacing:-.025em;margin:0}
+h3{font-size:18px;line-height:1.25;margin:0}
+.lead{font-size:18px;line-height:1.72;color:var(--muted);max-width:930px;margin:20px 0 0}
+.rule{height:1px;background:var(--line);margin:34px 0}
+.hero-grid{display:grid;grid-template-columns:1.5fr .8fr;gap:36px;align-items:end}
+.hero-side{border-left:1px solid var(--line);padding-left:26px}
+.stat{padding:12px 0;border-bottom:1px solid var(--line)}
+.stat:last-child{border-bottom:0}
+.stat .v{font-size:31px;font-weight:900;letter-spacing:-.03em}
+.stat .l{font-size:11px;color:var(--muted);margin-top:3px}
+.phase-row{display:grid;grid-template-columns:repeat(4,1fr);margin-top:38px;border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+.phase-cell{padding:18px 16px;border-right:1px solid var(--line);min-height:112px}
+.phase-cell:last-child{border-right:0}
+.phase-cell .phase-no{font-size:10px;color:var(--muted);font-weight:800}
+.phase-cell .phase-name{font-size:17px;font-weight:900;margin:22px 0 3px}
+.phase-cell .phase-desc{font-size:11px;color:var(--muted);line-height:1.5}
+.phase-cell.red{background:var(--red);color:#fff}
+.phase-cell.red .phase-no,.phase-cell.red .phase-desc{color:#f1c7ca}
+.four-principles{display:grid;grid-template-columns:repeat(4,1fr);gap:0;border:1px solid var(--line);margin-top:24px}
+.principle{padding:22px;border-right:1px solid var(--line)}
+.principle:last-child{border-right:0}
+.principle .num{font-size:11px;font-weight:900;color:var(--red)}
+.principle h3{margin:22px 0 7px}
+.principle p{font-size:12px;line-height:1.6;color:var(--muted);margin:0}
+.workflow-head{display:grid;grid-template-columns:1fr auto;gap:20px;align-items:end}
+.workflow-legend{display:flex;gap:14px;flex-wrap:wrap;justify-content:flex-end}
+.legend-item{font-size:10px;color:var(--muted);display:flex;align-items:center;gap:6px}
+.legend-dot{width:8px;height:8px;border-radius:50%}
+.workflow-line{margin-top:44px;display:grid;grid-template-columns:repeat(11,minmax(124px,1fr));gap:0;overflow-x:auto;padding-bottom:8px}
+.node{min-width:124px;position:relative;padding:0 10px 14px 0;cursor:pointer}
+.node:before{content:"";position:absolute;left:17px;right:-1px;top:17px;height:1px;background:#bdb8b0}
+.node:last-child:before{right:calc(100% - 18px)}
+.node-circle{position:relative;z-index:2;width:35px;height:35px;border-radius:50%;display:grid;place-items:center;background:var(--paper);border:1px solid #aaa49b;font-size:10px;font-weight:900;transition:.18s}
+.node:hover .node-circle{background:var(--red);border-color:var(--red);color:#fff;transform:scale(1.08)}
+.node.phase-contract .node-circle{border-color:#333}
+.node.phase-install .node-circle{border-color:#777}
+.node.phase-operation .node-circle{border-color:var(--red)}
+.node.phase-settlement .node-circle{border-color:var(--red-dark)}
+.node-title{font-size:11px;font-weight:800;line-height:1.4;margin-top:11px;max-width:112px}
+.node-owner{font-size:9px;color:var(--muted);margin-top:5px;line-height:1.35}
+.workflow-footer{margin-top:34px;display:grid;grid-template-columns:repeat(3,1fr);border-top:1px solid var(--line)}
+.flow-axis{padding:18px 20px;border-right:1px solid var(--line)}
+.flow-axis:last-child{border-right:0}
+.flow-axis .axis-label{font-size:9px;color:var(--red);font-weight:900;letter-spacing:.12em}
+.flow-axis strong{display:block;margin:12px 0 4px;font-size:15px}
+.flow-axis span{font-size:11px;color:var(--muted)}
+.process-hero{display:grid;grid-template-columns:140px 1fr 340px;gap:30px;align-items:end}
+.process-no{font-size:104px;font-weight:900;letter-spacing:-.07em;line-height:.82;color:var(--red)}
+.process-meta{font-size:11px;color:var(--muted);margin-top:8px}
+.remember-box{background:var(--black);color:#fff;padding:24px;min-height:148px;display:flex;flex-direction:column;justify-content:space-between}
+.remember-box .label{font-size:9px;text-transform:uppercase;letter-spacing:.14em;color:#8e8e8e}
+.remember-box strong{font-size:21px;line-height:1.45}
+.process-grid{display:grid;grid-template-columns:1.35fr 1fr 1fr;gap:0;border-top:1px solid var(--line);border-bottom:1px solid var(--line);margin-top:38px}
+.process-col{padding:24px 22px;border-right:1px solid var(--line);min-height:280px}
+.process-col:last-child{border-right:0}
+.col-label{font-size:9px;text-transform:uppercase;letter-spacing:.14em;color:var(--muted);font-weight:900;margin-bottom:16px}
+.process-col ol,.process-col ul{margin:0;padding-left:19px;font-size:12px;line-height:1.65}
+.process-col li{margin:6px 0}
+.tags{display:flex;flex-wrap:wrap;gap:7px}
+.tag{font-size:10px;border:1px solid var(--line);padding:6px 8px;border-radius:999px;background:#fff}
+.inline-note{margin-top:16px;padding:12px 13px;background:var(--soft);border-left:3px solid var(--red);font-size:11px;line-height:1.55}
+.entry{background:#171717;color:#eaeaea;padding:15px;font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:10px;line-height:1.6;white-space:pre-line}
+.doa-intro{display:grid;grid-template-columns:1.1fr .9fr;gap:34px}
+.avr{display:grid;grid-template-columns:repeat(3,1fr);border:1px solid var(--line)}
+.avr>div{padding:20px;border-right:1px solid var(--line)}
+.avr>div:last-child{border-right:0}
+.avr b{font-size:32px;color:var(--red)}
+.avr strong{display:block;margin-top:10px}
+.avr span{font-size:11px;color:var(--muted)}
+.doa-section{margin-top:26px}
+.doa-section h3{margin-bottom:9px}
+table{width:100%;border-collapse:collapse;font-size:11px;background:#fff}
+th,td{border:1px solid var(--line);padding:10px 11px;text-align:left;vertical-align:top}
+th{background:#efebe4;font-size:10px;letter-spacing:.04em}
+.docs{display:grid;grid-template-columns:repeat(3,1fr);border-top:1px solid var(--line);border-left:1px solid var(--line);margin-top:30px}
+.doc{padding:20px;border-right:1px solid var(--line);border-bottom:1px solid var(--line);min-height:140px}
+.doc .doc-no{font-size:9px;color:var(--red);font-weight:900}
+.doc h3{margin:18px 0 7px;font-size:15px}
+.doc p{font-size:11px;line-height:1.55;color:var(--muted);margin:0}
+.bottombar{position:fixed;left:260px;right:0;bottom:0;z-index:18;background:rgba(236,233,227,.94);backdrop-filter:blur(14px);border-top:1px solid var(--line)}
+.bottominner{height:68px;max-width:1360px;margin:auto;display:grid;grid-template-columns:1fr auto 1fr;align-items:center;padding:0 18px}
+.navbtn{border:0;background:transparent;font-size:12px;font-weight:800;color:#37332f;padding:10px 0}
+.navbtn:hover{color:var(--red)}
+.navbtn.next{justify-self:end}
+.navbtn:disabled{opacity:.3;cursor:default}
+.center-nav{display:flex;align-items:center;gap:8px}
+.workflow-btn{border:1px solid var(--black);background:var(--black);color:#fff;padding:8px 12px;border-radius:999px;font-size:10px;font-weight:800}
+.dots{display:flex;gap:5px}
+.dot{width:6px;height:6px;border-radius:50%;background:#bdb7ae;border:0;padding:0}
+.dot.active{width:18px;border-radius:99px;background:var(--red)}
+.mobile-menu{display:none}
+@media(max-width:1180px){
+  .shell{grid-template-columns:210px 1fr}.sidebar{padding:24px 15px}.bottombar{left:210px}
+  .slide-pad{padding:42px}.process-hero{grid-template-columns:105px 1fr 280px}.process-no{font-size:80px}
+  .workflow-line{grid-template-columns:repeat(11,135px)}
+}
+@media(max-width:860px){
+  .shell{display:block}.sidebar{display:none}.bottombar{left:0}.mobile-menu{display:inline-flex}
+  .canvas{padding:18px 12px 95px}.slide-pad{padding:28px 22px}.topbar{padding:0 14px}
+  .hero-grid,.doa-intro,.process-hero{grid-template-columns:1fr}.hero-side{border-left:0;border-top:1px solid var(--line);padding-left:0;padding-top:18px}
+  .phase-row{grid-template-columns:1fr 1fr}.phase-cell:nth-child(2){border-right:0}.phase-cell:nth-child(-n+2){border-bottom:1px solid var(--line)}
+  .four-principles{grid-template-columns:1fr 1fr}.principle:nth-child(2){border-right:0}.principle:nth-child(-n+2){border-bottom:1px solid var(--line)}
+  .process-grid{grid-template-columns:1fr}.process-col{border-right:0;border-bottom:1px solid var(--line);min-height:auto}.process-col:last-child{border-bottom:0}
+  .workflow-footer{grid-template-columns:1fr}.flow-axis{border-right:0;border-bottom:1px solid var(--line)}.flow-axis:last-child{border-bottom:0}
+  .docs{grid-template-columns:1fr 1fr}.remember-box{min-height:auto}
+}
+@media(max-width:560px){
+  .slide-pad{padding:24px 18px}.slide-index{font-size:58px}.phase-row,.four-principles,.docs{grid-template-columns:1fr}
+  .phase-cell,.principle{border-right:0!important;border-bottom:1px solid var(--line)}.phase-cell:last-child,.principle:last-child{border-bottom:0}
+  .avr{grid-template-columns:1fr}.avr>div{border-right:0;border-bottom:1px solid var(--line)}.avr>div:last-child{border-bottom:0}
+  .bottominner{grid-template-columns:1fr auto 1fr}.dots{display:none}.top-actions{display:none}
+}
+@media print{
+  .sidebar,.topbar,.bottombar{display:none!important}.shell{display:block}.canvas{padding:0}.slide{display:block!important;box-shadow:none;border:0;page-break-after:always;min-height:auto}
+}
 </style>
 </head>
 <body>
-<header class="topbar">
-  <div class="topinner">
-    <div class="brand">SINGER <span>· PVM TRAINING</span></div>
-    <div class="topnav">
-      <button data-goto="1">Overview</button>
-      <button data-goto="2">Workflow</button>
-      <button data-goto="14">DOA</button>
-      <button data-goto="15">Documents</button>
-    </div>
-    <div class="spacer"></div>
-    <div class="counter" id="topCounter">01 / 15</div>
+<div class="shell">
+<aside class="sidebar">
+  <div class="brand"><div class="brand-mark"></div><div><div class="brand-name">SINGER PVM</div><div class="brand-sub">Training Playbook</div></div></div>
+  <div class="side-label">Navigate</div>
+  <div class="chapter-list">
+    <button class="chapter" data-goto="1"><span class="n">01</span><span class="t">ภาพรวมโครงการ</span></button>
+    <button class="chapter" data-goto="2"><span class="n">02</span><span class="t">Workflow รวม</span></button>
+    <button class="chapter" data-goto="3"><span class="n">03</span><span class="t">Process 01–04</span></button>
+    <button class="chapter" data-goto="7"><span class="n">07</span><span class="t">Process 05–08</span></button>
+    <button class="chapter" data-goto="11"><span class="n">11</span><span class="t">Process 09–11</span></button>
+    <button class="chapter" data-goto="14"><span class="n">14</span><span class="t">Approval Authority</span></button>
+    <button class="chapter" data-goto="15"><span class="n">15</span><span class="t">Documents & Examples</span></button>
   </div>
-  <div class="progress"><div id="progressBar"></div></div>
+  <div class="side-spacer"></div>
+  <div class="side-note"><strong>Training use</strong><br>Workflow = แกนหลัก<br>SOP = รายละเอียดสนับสนุน<br>DOA = กรอบอำนาจอนุมัติ</div>
+</aside>
+
+<div class="main">
+<header class="topbar">
+  <div class="topbar-left"><button class="top-btn mobile-menu" data-goto="2">Workflow</button><span class="kicker" id="topTitle">PVM Training Playbook</span></div>
+  <div class="top-actions"><button class="top-btn" data-goto="1">Overview</button><button class="top-btn" data-goto="14">DOA</button><button class="top-btn" data-goto="15">Documents</button></div>
+  <div class="page-counter" id="counter">01 / 15</div>
+  <div class="progress-line"><div id="progress"></div></div>
 </header>
 
-<main class="stage" id="stage">
+<main class="canvas">
 
-<section class="page" data-page="1" data-title="ภาพรวมโครงการ">
-  <div class="eyebrow">PAGE 01 · OVERVIEW</div>
-  <h1>เข้าใจโครงการ <span class="accent">ตู้น้ำมัน PVM</span></h1>
-  <p class="lead">บริษัทนำตู้น้ำมันไปติดตั้งในพื้นที่ที่ผ่านการพิจารณา ทำสัญญากับเจ้าของพื้นที่ เติมน้ำมันเพื่อจำหน่าย รับเงินจากลูกค้า บริหาร Stock/Asset/รายได้ และดำเนินการจนถึงการยกเลิกจุดติดตั้งและจ่ายค่าตอบแทนที่เกี่ยวข้อง</p>
-  <div class="phasebar">
-    <div class="phase contract"><b>CONTRACT</b><small>สำรวจ · เบิกตู้ · ทำสัญญา</small></div>
-    <div class="phase install"><b>INSTALLATION</b><small>Location · ติดตั้ง · ทดสอบ</small></div>
-    <div class="phase operation"><b>OPERATION</b><small>Advance · Fuel · Sales · Transfer · Hand Over</small></div>
-    <div class="phase settlement"><b>SETTLEMENT</b><small>ยกเลิก · Commission · WHT</small></div>
-  </div>
-  <div class="grid g4">
-    <div class="card"><div class="k">ASSET</div><h3>ตู้อยู่ที่ไหน?</h3><p>Serial, Asset Register, ERP Location และจุดติดตั้งจริงต้องเชื่อมโยงกัน</p></div>
-    <div class="card"><div class="k">FUEL</div><h3>น้ำมันเหลือเท่าไร?</h3><p>ซื้อ เติม ขาย โอน และ Loss ต้องสามารถติดตามย้อนหลังได้</p></div>
-    <div class="card"><div class="k">REVENUE</div><h3>ขายแล้วได้เงินครบไหม?</h3><p>POS → QR → Match → Bank → GL ต้องกระทบยอดกันได้</p></div>
-    <div class="card"><div class="k">CONTRACT</div><h3>เริ่ม–จบครบไหม?</h3><p>Contract, Stock, Cash, Asset Location, Commission และ WHT ต้องปิดครบ</p></div>
-  </div>
-  <div class="note"><b>วิธีใช้คู่มือนี้:</b> เริ่มจากหน้า Workflow แล้วกดเข้า Process ที่ต้องการเรียน จากนั้นใช้ปุ่ม “ก่อนหน้า / Workflow / ถัดไป” ด้านล่าง หรือกด <span class="kbd">←</span> <span class="kbd">→</span> บนคีย์บอร์ด</div>
-</section>
+<section class="slide" data-page="1" data-title="ภาพรวมโครงการ">
+  <div class="slide-index">01</div>
+  <div class="slide-pad">
+    <div class="eyebrow">Project Overview</div>
+    <div class="hero-grid">
+      <div>
+        <h1>โครงการพิเศษ<br><span class="accent">ตู้น้ำมัน PVM</span></h1>
+        <p class="lead">คู่มือสอนงานแบบ End-to-End ตั้งแต่เลือกพื้นที่ ทำสัญญา เบิกและติดตั้งตู้ เติมน้ำมัน ขายและนำส่งรายได้ ไปจนถึงการยกเลิกจุดติดตั้งและจ่ายค่าตอบแทนเจ้าของพื้นที่</p>
+      </div>
+      <div class="hero-side">
+        <div class="stat"><div class="v">4</div><div class="l">Business phases</div></div>
+        <div class="stat"><div class="v">11</div><div class="l">Core processes</div></div>
+        <div class="stat"><div class="v">3</div><div class="l">Key data chains: Asset · Fuel · Cash</div></div>
+      </div>
+    </div>
 
-<section class="page" data-page="2" data-title="Workflow รวม">
-  <div class="eyebrow">PAGE 02 · END-TO-END WORKFLOW</div>
-  <h1>Workflow รวม <span class="accent">11 ขั้นตอน</span></h1>
-  <p class="lead">กดแต่ละ Step เพื่อเปิดหน้ารายละเอียดของ Process นั้นทันที</p>
-  <div class="workflow">
-    <a class="wstep contract" data-goto="3"><span class="num">01</span><b>สำรวจพื้นที่</b><small>ทีม PVM</small></a>
-    <a class="wstep contract" data-goto="4"><span class="num">02</span><b>เบิกตู้น้ำมัน PVM</b><small>บัญชี / SCM / PVM</small></a>
-    <a class="wstep contract" data-goto="5"><span class="num">03</span><b>ทำสัญญาเจ้าของพื้นที่</b><small>ทีม PVM</small></a>
-    <a class="wstep install" data-goto="6"><span class="num">04</span><b>ติดตั้งตู้น้ำมัน</b><small>บัญชี / จัดซื้อ / PVM</small></a>
-    <a class="wstep operation" data-goto="7"><span class="num">05</span><b>Advance ซื้อน้ำมัน</b><small>บัญชี / Head Project</small></a>
-    <a class="wstep operation" data-goto="8"><span class="num">06</span><b>ซื้อน้ำมันเข้าตู้</b><small>PVM / บัญชี / จัดซื้อ</small></a>
-    <a class="wstep operation" data-goto="9"><span class="num">07</span><b>ขายและนำส่งรายได้</b><small>PVM / กำกับสาขา</small></a>
-    <a class="wstep operation" data-goto="10"><span class="num">08</span><b>โอนย้ายน้ำมัน</b><small>PVM / บัญชี</small></a>
-    <a class="wstep operation" data-goto="11"><span class="num">09</span><b>เปลี่ยนผู้ดูแล</b><small>PVM / บัญชี</small></a>
-    <a class="wstep settlement" data-goto="12"><span class="num">10</span><b>ยกเลิกสัญญา</b><small>PVM / บัญชี</small></a>
-    <a class="wstep settlement" data-goto="13"><span class="num">11</span><b>ค่าตอบแทน + WHT</b><small>Project / SCM / IT / Finance</small></a>
-  </div>
-  <div class="note"><b>เส้นข้อมูลหลักที่ต้องเชื่อมกัน:</b> Owner/Contract → Asset/Location → Fuel Inventory → POS/Revenue → QR/Bank → GL → Commission/WHT → Contract Closure</div>
-  <div class="grid g3">
-    <div class="card"><div class="k">ASSET ↔ PHYSICAL</div><h3>ของจริงต้องตรงระบบ</h3><p>Serial / ERP Location / PVM Tracking / จุดติดตั้ง</p></div>
-    <div class="card"><div class="k">FUEL ↔ SALES</div><h3>Stock ต้องอธิบายได้</h3><p>ซื้อ + โอนเข้า − ขาย − โอนออก ± Loss</p></div>
-    <div class="card"><div class="k">SALES ↔ CASH</div><h3>ยอดขายต้องกลายเป็นเงิน</h3><p>POS ↔ QR ↔ Bank ↔ GL</p></div>
+    <div class="phase-row">
+      <div class="phase-cell"><div class="phase-no">01</div><div class="phase-name">CONTRACT</div><div class="phase-desc">สำรวจพื้นที่ · เบิกตู้ · ทำสัญญา</div></div>
+      <div class="phase-cell"><div class="phase-no">02</div><div class="phase-name">INSTALL</div><div class="phase-desc">สร้าง Location · ติดตั้ง · ทดสอบ</div></div>
+      <div class="phase-cell red"><div class="phase-no">03</div><div class="phase-name">OPERATION</div><div class="phase-desc">Advance · Fuel · Sales · Transfer · Hand Over</div></div>
+      <div class="phase-cell"><div class="phase-no">04</div><div class="phase-name">SETTLEMENT</div><div class="phase-desc">ยกเลิก · Commission · WHT</div></div>
+    </div>
+
+    <div class="four-principles">
+      <div class="principle"><div class="num">01 · ASSET</div><h3>ตู้อยู่ที่ไหน?</h3><p>Serial, ERP Location และจุดติดตั้งจริงต้องตามย้อนกลับได้</p></div>
+      <div class="principle"><div class="num">02 · FUEL</div><h3>น้ำมันอยู่เท่าไร?</h3><p>ซื้อ เติม ขาย โอน และ Loss ต้องอธิบาย Stock ได้</p></div>
+      <div class="principle"><div class="num">03 · CASH</div><h3>ได้เงินครบไหม?</h3><p>POS → QR → Bank → GL ต้อง Match และ Reconcile ได้</p></div>
+      <div class="principle"><div class="num">04 · CONTRACT</div><h3>จบงานครบไหม?</h3><p>Contract, Stock, Cash, Asset และค่าตอบแทนต้องปิดครบ</p></div>
+    </div>
   </div>
 </section>
 
-<section class="page" data-page="3" data-title="01 สำรวจพื้นที่">
-  <div class="eyebrow">PAGE 03 · PROCESS 01 · CONTRACT</div>
-  <div class="process-top"><div class="process-title"><div class="stepbig">01</div><h1>สำรวจพื้นที่</h1><p class="lead">Owner: ทีม PVM</p></div><div class="remember"><small>จำง่าย ๆ</small><strong>“ทำเลต้องผ่านการประเมินก่อนเริ่มสัญญา”</strong></div></div>
-  <div class="columns">
-    <div class="box"><h4>ทำอะไร</h4><ol><li>สำรวจพื้นที่</li><li>เก็บข้อมูลเจ้าของพื้นที่</li><li>ประเมินศักยภาพทำเล</li><li>ติดต่อเจ้าของพื้นที่เพื่อขอติดตั้งตู้</li></ol></div>
-    <div class="box"><h4>เอกสาร / หลักฐาน</h4><div class="tags"><span class="tag">Checklist ประเมินพื้นที่</span><span class="tag">ภาพ/หลักฐาน Location</span><span class="tag">ข้อมูลเจ้าของพื้นที่</span></div></div>
-    <div class="box"><h4>จุดควบคุม</h4><ul><li>ใช้เกณฑ์ประเมินพื้นที่ก่อนดำเนินการต่อ</li><li>ข้อมูล Location ต้องสามารถนำไปเชื่อมกับสัญญาและ Asset ได้</li></ul></div>
+<section class="slide" data-page="2" data-title="Workflow รวม">
+  <div class="slide-index">02</div>
+  <div class="slide-pad">
+    <div class="workflow-head">
+      <div><div class="eyebrow">End-to-End Workflow</div><h1>11 ขั้นตอน<br><span class="accent">หนึ่งวงจรเดียว</span></h1></div>
+      <div class="workflow-legend">
+        <div class="legend-item"><span class="legend-dot" style="background:#333"></span>Contract</div>
+        <div class="legend-item"><span class="legend-dot" style="background:#777"></span>Installation</div>
+        <div class="legend-item"><span class="legend-dot" style="background:#d71920"></span>Operation</div>
+        <div class="legend-item"><span class="legend-dot" style="background:#9d1117"></span>Settlement</div>
+      </div>
+    </div>
+
+    <div class="workflow-line">
+      <div class="node phase-contract" data-goto="3"><div class="node-circle">01</div><div class="node-title">สำรวจพื้นที่</div><div class="node-owner">ทีม PVM</div></div>
+      <div class="node phase-contract" data-goto="4"><div class="node-circle">02</div><div class="node-title">เบิกตู้น้ำมัน</div><div class="node-owner">บัญชี / SCM / PVM</div></div>
+      <div class="node phase-contract" data-goto="5"><div class="node-circle">03</div><div class="node-title">ทำสัญญาพื้นที่</div><div class="node-owner">ทีม PVM</div></div>
+      <div class="node phase-install" data-goto="6"><div class="node-circle">04</div><div class="node-title">ติดตั้งตู้น้ำมัน</div><div class="node-owner">บัญชี / จัดซื้อ / PVM</div></div>
+      <div class="node phase-operation" data-goto="7"><div class="node-circle">05</div><div class="node-title">Advance ซื้อน้ำมัน</div><div class="node-owner">บัญชี / Head Project</div></div>
+      <div class="node phase-operation" data-goto="8"><div class="node-circle">06</div><div class="node-title">ซื้อน้ำมันเข้าตู้</div><div class="node-owner">PVM / บัญชี / จัดซื้อ</div></div>
+      <div class="node phase-operation" data-goto="9"><div class="node-circle">07</div><div class="node-title">ขายและนำส่งรายได้</div><div class="node-owner">PVM / กำกับสาขา</div></div>
+      <div class="node phase-operation" data-goto="10"><div class="node-circle">08</div><div class="node-title">โอนย้ายน้ำมัน</div><div class="node-owner">PVM / บัญชี</div></div>
+      <div class="node phase-operation" data-goto="11"><div class="node-circle">09</div><div class="node-title">เปลี่ยนผู้ดูแล</div><div class="node-owner">PVM / บัญชี</div></div>
+      <div class="node phase-settlement" data-goto="12"><div class="node-circle">10</div><div class="node-title">ยกเลิกสัญญา</div><div class="node-owner">PVM / บัญชี</div></div>
+      <div class="node phase-settlement" data-goto="13"><div class="node-circle">11</div><div class="node-title">Commission + WHT</div><div class="node-owner">Project / SCM / IT / Finance</div></div>
+    </div>
+
+    <div class="workflow-footer">
+      <div class="flow-axis"><div class="axis-label">ASSET CHAIN</div><strong>Serial → ERP Location → จุดติดตั้ง</strong><span>ของจริงและข้อมูลในระบบต้องเป็นจุดเดียวกัน</span></div>
+      <div class="flow-axis"><div class="axis-label">FUEL CHAIN</div><strong>ซื้อ + โอนเข้า − ขาย − โอนออก ± Loss</strong><span>ต้องอธิบาย Stock คงเหลือได้</span></div>
+      <div class="flow-axis"><div class="axis-label">MONEY CHAIN</div><strong>POS → QR → Bank → GL</strong><span>ยอดขายต้องกลายเป็นเงินครบและกระทบยอดได้</span></div>
+    </div>
   </div>
 </section>
 
-<section class="page" data-page="4" data-title="02 เบิกตู้น้ำมัน PVM">
-  <div class="eyebrow">PAGE 04 · PROCESS 02 · CONTRACT</div>
-  <div class="process-top"><div class="process-title"><div class="stepbig">02</div><h1>เบิกตู้น้ำมัน PVM</h1><p class="lead">Owner: บัญชี / SCM / ทีม PVM</p></div><div class="remember"><small>จำง่าย ๆ</small><strong>“ตู้ที่เบิกต้องรู้ Serial และต้องรู้ว่าจะไปอยู่ที่ Location ไหน”</strong></div></div>
-  <div class="columns">
-    <div class="box"><h4>ทำอะไร</h4><ol><li>เบิก Advance ที่เกี่ยวข้องกับการติดตั้ง</li><li>ทีม PVM แจ้ง Head Project</li><li>SCM ตรวจสอบ Asset คงเหลือ</li><li>หากจำนวนไม่เพียงพอให้ดำเนินการ Drop Fixed Asset ตาม Flow</li></ol></div>
-    <div class="box"><h4>ระบบ</h4><div class="tags"><span class="tag">ERP</span><span class="tag">Asset</span><span class="tag">Finance</span></div><div class="note"><b>ตาม Flow:</b> ฝ่ายบัญชีติดตามการเคลียร์ Advance ภายใน 30 วัน</div></div>
-    <div class="box"><h4>Accounting</h4><div class="account">Dr 1709113 MACHINERY CLEARING
-Cr 1401003 INVENTORY - GRADE B
 
-Dr 1701013 MACHINERY
-Cr 1709113 MACHINERY CLEARING</div></div>
+<section class="slide" data-page="3" data-title="01 สำรวจพื้นที่">
+  <div class="slide-index">01</div>
+  <div class="slide-pad">
+    <div class="eyebrow">CONTRACT · PROCESS 01</div>
+    <div class="process-hero">
+      <div class="process-no">01</div>
+      <div><h2>สำรวจพื้นที่</h2><div class="process-meta">Owner · ทีม PVM</div></div>
+      <div class="remember-box"><div class="label">Key takeaway</div><strong>“ทำเลต้องผ่านการประเมิน ก่อนเริ่มเรื่องสัญญา”</strong></div>
+    </div>
+    <div class="process-grid">
+      <div class="process-col">
+        <div class="col-label">What happens</div>
+        <ol><li>สำรวจพื้นที่</li><li>เก็บข้อมูลเจ้าของพื้นที่</li><li>ประเมินศักยภาพทำเล</li><li>ติดต่อเจ้าของพื้นที่เพื่อขอติดตั้งตู้</li></ol>
+      </div>
+      <div class="process-col">
+        <div class="col-label">Documents / Systems</div>
+        <div class="tags"><span class="tag">Checklist ประเมินพื้นที่</span><span class="tag">ภาพ/หลักฐาน Location</span><span class="tag">ข้อมูลเจ้าของพื้นที่</span></div>
+        <div class="inline-note"><b>Purpose:</b> ให้ข้อมูลและหลักฐานของขั้นตอนนี้เชื่อมต่อไปยัง Process ถัดไปได้โดยไม่ขาดช่วง</div>
+      </div>
+      <div class="process-col">
+        <div class="col-label">Control / Accounting</div>
+        <ul><li>ใช้เกณฑ์ประเมินพื้นที่ก่อนดำเนินการต่อ</li><li>ข้อมูล Location ต้องนำไปเชื่อมกับสัญญาและ Asset ได้</li></ul>
+        
+      </div>
+    </div>
+  </div>
+</section>
+<section class="slide" data-page="4" data-title="02 เบิกตู้น้ำมัน PVM">
+  <div class="slide-index">02</div>
+  <div class="slide-pad">
+    <div class="eyebrow">CONTRACT · PROCESS 02</div>
+    <div class="process-hero">
+      <div class="process-no">02</div>
+      <div><h2>เบิกตู้น้ำมัน PVM</h2><div class="process-meta">Owner · บัญชี / SCM / ทีม PVM</div></div>
+      <div class="remember-box"><div class="label">Key takeaway</div><strong>“ตู้ที่เบิกต้องรู้ Serial และรู้ว่าจะไปอยู่ Location ไหน”</strong></div>
+    </div>
+    <div class="process-grid">
+      <div class="process-col">
+        <div class="col-label">What happens</div>
+        <ol><li>เบิก Advance ที่เกี่ยวข้องกับการติดตั้ง</li><li>ทีม PVM แจ้ง Head Project</li><li>SCM ตรวจสอบ Asset คงเหลือ</li><li>หากไม่เพียงพอ ดำเนินการ Drop Fixed Asset ตาม Flow</li></ol>
+      </div>
+      <div class="process-col">
+        <div class="col-label">Documents / Systems</div>
+        <div class="tags"><span class="tag">ERP</span><span class="tag">Asset</span><span class="tag">Finance</span></div>
+        <div class="inline-note"><b>Purpose:</b> ให้ข้อมูลและหลักฐานของขั้นตอนนี้เชื่อมต่อไปยัง Process ถัดไปได้โดยไม่ขาดช่วง</div>
+      </div>
+      <div class="process-col">
+        <div class="col-label">Control / Accounting</div>
+        <ul><li>ติดตาม Advance ภายใน 30 วันตาม Flow</li><li>Asset/Serial ต้องสัมพันธ์กับตู้จริง</li></ul>
+        <div class="entry" style="margin-top:16px">Dr 1709113 MACHINERY CLEARING\nCr 1401003 INVENTORY - GRADE B\n\nDr 1701013 MACHINERY\nCr 1709113 MACHINERY CLEARING</div>
+      </div>
+    </div>
+  </div>
+</section>
+<section class="slide" data-page="5" data-title="03 ทำสัญญาเจ้าของพื้นที่">
+  <div class="slide-index">03</div>
+  <div class="slide-pad">
+    <div class="eyebrow">CONTRACT · PROCESS 03</div>
+    <div class="process-hero">
+      <div class="process-no">03</div>
+      <div><h2>ทำสัญญาเจ้าของพื้นที่</h2><div class="process-meta">Owner · ทีม PVM</div></div>
+      <div class="remember-box"><div class="label">Key takeaway</div><strong>“Owner + Contract + Location ต้องเป็นข้อมูลชุดเดียวกัน”</strong></div>
+    </div>
+    <div class="process-grid">
+      <div class="process-col">
+        <div class="col-label">What happens</div>
+        <ol><li>จัดทำและลงนาม Owner Contract</li><li>กรอกแบบขอเปิดสัญญาพื้นที่ใหม่</li><li>บันทึกข้อมูลใน PVM Tracking</li></ol>
+      </div>
+      <div class="process-col">
+        <div class="col-label">Documents / Systems</div>
+        <div class="tags"><span class="tag">Owner Contract</span><span class="tag">แบบขอเปิดสัญญา</span><span class="tag">Checklist สัญญา</span><span class="tag">PVM Tracking</span></div>
+        <div class="inline-note"><b>Purpose:</b> ให้ข้อมูลและหลักฐานของขั้นตอนนี้เชื่อมต่อไปยัง Process ถัดไปได้โดยไม่ขาดช่วง</div>
+      </div>
+      <div class="process-col">
+        <div class="col-label">Control / Accounting</div>
+        <ul><li>เอกสารคู่สัญญาต้องครบ</li><li>ผู้ลงนาม/ผู้อนุมัติต้องตรงกับ DOA ที่เกี่ยวข้อง</li></ul>
+        
+      </div>
+    </div>
+  </div>
+</section>
+<section class="slide" data-page="6" data-title="04 ติดตั้งตู้น้ำมัน">
+  <div class="slide-index">04</div>
+  <div class="slide-pad">
+    <div class="eyebrow">INSTALLATION · PROCESS 04</div>
+    <div class="process-hero">
+      <div class="process-no">04</div>
+      <div><h2>ติดตั้งตู้น้ำมัน</h2><div class="process-meta">Owner · บัญชี / จัดซื้อ / ทีม PVM</div></div>
+      <div class="remember-box"><div class="label">Key takeaway</div><strong>“ระบบกับของจริงต้องตรงกัน ก่อนเปิดขาย”</strong></div>
+    </div>
+    <div class="process-grid">
+      <div class="process-col">
+        <div class="col-label">What happens</div>
+        <ol><li>บัญชีสร้าง Location และโอนย้ายตู้ใน ERP</li><li>เติมน้ำมัน 0.01 ลิตรในระบบตาม Flow</li><li>จัดซื้อสร้าง Item Code</li><li>PVM เติมน้ำมันเข้าตู้</li><li>ติดตั้ง ทดสอบ ตั้งค่าราคา</li><li>ส่งมอบผู้ดูแล</li></ol>
+      </div>
+      <div class="process-col">
+        <div class="col-label">Documents / Systems</div>
+        <div class="tags"><span class="tag">ERP</span><span class="tag">Item Master</span><span class="tag">Email อนุมัติ</span><span class="tag">Excel จุดติดตั้ง</span><span class="tag">Timestamp Photo</span></div>
+        <div class="inline-note"><b>Purpose:</b> ให้ข้อมูลและหลักฐานของขั้นตอนนี้เชื่อมต่อไปยัง Process ถัดไปได้โดยไม่ขาดช่วง</div>
+      </div>
+      <div class="process-col">
+        <div class="col-label">Control / Accounting</div>
+        <ul><li>ERP Location + Serial + จุดติดตั้งจริงต้องสัมพันธ์กัน</li><li>ต้องมีหลักฐานการติดตั้ง/ทดสอบ/ตั้งค่า</li></ul>
+        
+      </div>
+    </div>
+  </div>
+</section>
+<section class="slide" data-page="7" data-title="05 Advance เพื่อซื้อน้ำมัน">
+  <div class="slide-index">05</div>
+  <div class="slide-pad">
+    <div class="eyebrow">OPERATION · PROCESS 05</div>
+    <div class="process-hero">
+      <div class="process-no">05</div>
+      <div><h2>Advance เพื่อซื้อน้ำมัน</h2><div class="process-meta">Owner · บัญชี / Head Project</div></div>
+      <div class="remember-box"><div class="label">Key takeaway</div><strong>“ยืมเงิน → ซื้อจริง → มีหลักฐาน → เคลียร์ให้ครบ”</strong></div>
+    </div>
+    <div class="process-grid">
+      <div class="process-col">
+        <div class="col-label">What happens</div>
+        <ol><li>เบิก Advance</li><li>ขออนุมัติ</li><li>ซื้อน้ำมัน</li><li>เติมเข้าตู้</li><li>รวบรวมหลักฐาน</li><li>เคลียร์ Advance</li></ol>
+      </div>
+      <div class="process-col">
+        <div class="col-label">Documents / Systems</div>
+        <div class="tags"><span class="tag">PV</span><span class="tag">ใบเสร็จ/ใบกำกับภาษี</span><span class="tag">รายละเอียดปริมาณ/ราคา</span><span class="tag">หลักฐานเติมน้ำมัน</span></div>
+        <div class="inline-note"><b>Purpose:</b> ให้ข้อมูลและหลักฐานของขั้นตอนนี้เชื่อมต่อไปยัง Process ถัดไปได้โดยไม่ขาดช่วง</div>
+      </div>
+      <div class="process-col">
+        <div class="col-label">Control / Accounting</div>
+        <ul><li>ตรวจวงเงิน Advance ตาม DOA หน้า 23–24</li><li>เอกสารซื้อและปริมาณต้องสัมพันธ์กัน</li></ul>
+        <div class="entry" style="margin-top:16px">Dr 1303001 ADVANCE PAYMENT TO SUPPLIER\nCr 2309013 AP EXPENSE\n\nPayment → Cash Clearing → Bank\nClear Advance ตามเอกสาร</div>
+      </div>
+    </div>
+  </div>
+</section>
+<section class="slide" data-page="8" data-title="06 ซื้อน้ำมันเข้าตู้">
+  <div class="slide-index">06</div>
+  <div class="slide-pad">
+    <div class="eyebrow">OPERATION · PROCESS 06</div>
+    <div class="process-hero">
+      <div class="process-no">06</div>
+      <div><h2>ซื้อน้ำมันเข้าตู้</h2><div class="process-meta">Owner · ทีม PVM / บัญชี / จัดซื้อ</div></div>
+      <div class="remember-box"><div class="label">Key takeaway</div><strong>“ซื้อมากี่ลิตร ต้องรู้ว่าเติมเข้าตู้ไหน และเข้าระบบเท่าไร”</strong></div>
+    </div>
+    <div class="process-grid">
+      <div class="process-col">
+        <div class="col-label">What happens</div>
+        <ol><li>เติมน้ำมันเข้าตู้</li><li>บันทึกใน PVM Tracking</li><li>ส่งใบเสร็จ/เอกสารให้จัดซื้อ</li><li>จัดซื้อตรวจสอบ</li><li>บัญชีเคลียร์ Advance</li></ol>
+      </div>
+      <div class="process-col">
+        <div class="col-label">Documents / Systems</div>
+        <div class="tags"><span class="tag">PVM Tracking</span><span class="tag">ERP Inventory</span></div>
+        <div class="inline-note"><b>Purpose:</b> ให้ข้อมูลและหลักฐานของขั้นตอนนี้เชื่อมต่อไปยัง Process ถัดไปได้โดยไม่ขาดช่วง</div>
+      </div>
+      <div class="process-col">
+        <div class="col-label">Control / Accounting</div>
+        <ul><li>ปริมาณซื้อ/เติม/Inventory ต้องสัมพันธ์กัน</li><li>เอกสารต้องตรวจสอบย้อนหลังได้</li></ul>
+        <div class="entry" style="margin-top:16px">Dr 1401024 INVENTORY - FUEL\nCr 2201008 SUSPENSE INVENTORY AP ACCRUAL</div>
+      </div>
+    </div>
+  </div>
+</section>
+<section class="slide" data-page="9" data-title="07 ขายและนำส่งรายได้">
+  <div class="slide-index">07</div>
+  <div class="slide-pad">
+    <div class="eyebrow">OPERATION · PROCESS 07</div>
+    <div class="process-hero">
+      <div class="process-no">07</div>
+      <div><h2>ขายและนำส่งรายได้</h2><div class="process-meta">Owner · ทีม PVM / ฝ่ายกำกับสาขา</div></div>
+      <div class="remember-box"><div class="label">Key takeaway</div><strong>“ขายเท่าไร เงินต้องเข้าบริษัทเท่านั้น และ Match ได้”</strong></div>
+    </div>
+    <div class="process-grid">
+      <div class="process-col">
+        <div class="col-label">What happens</div>
+        <ol><li>ลูกค้าเติมน้ำมัน</li><li>POS บันทึกยอดขาย</li><li>สร้าง Task งานเก็บเงิน</li><li>นำส่งเงินผ่าน QR</li><li>ฝ่ายกำกับสาขา Match ยอด</li><li>Bank Reconcile</li></ol>
+      </div>
+      <div class="process-col">
+        <div class="col-label">Documents / Systems</div>
+        <div class="tags"><span class="tag">POS</span><span class="tag">PVM Tracking</span><span class="tag">QR</span><span class="tag">Bank</span><span class="tag">GL</span></div>
+        <div class="inline-note"><b>Purpose:</b> ให้ข้อมูลและหลักฐานของขั้นตอนนี้เชื่อมต่อไปยัง Process ถัดไปได้โดยไม่ขาดช่วง</div>
+      </div>
+      <div class="process-col">
+        <div class="col-label">Control / Accounting</div>
+        <ul><li>POS → QR → Bank → GL ต้องกระทบยอดกันได้</li><li>ติดตาม Cash Under Remitted เมื่อยอดขาด</li></ul>
+        <div class="entry" style="margin-top:16px">Cash in Transit + Revenue + VAT Output\nFuel Expense / Inventory - Fuel\nCash Clearing / Bank\nCash Under Remitted (กรณีขาด)</div>
+      </div>
+    </div>
+  </div>
+</section>
+<section class="slide" data-page="10" data-title="08 โอนย้ายน้ำมันระหว่างตู้">
+  <div class="slide-index">08</div>
+  <div class="slide-pad">
+    <div class="eyebrow">OPERATION · PROCESS 08</div>
+    <div class="process-hero">
+      <div class="process-no">08</div>
+      <div><h2>โอนย้ายน้ำมันระหว่างตู้</h2><div class="process-meta">Owner · ทีม PVM / บัญชี</div></div>
+      <div class="remember-box"><div class="label">Key takeaway</div><strong>“ก่อนย้าย–หลังย้าย ต้องรู้ปริมาณ และต้องรู้ Loss”</strong></div>
+    </div>
+    <div class="process-grid">
+      <div class="process-col">
+        <div class="col-label">What happens</div>
+        <ol><li>ตรวจ Stock ต้นทาง/ปลายทาง</li><li>ขออนุมัติ</li><li>ขนย้าย</li><li>วัดปริมาณก่อน–หลัง</li><li>บันทึกการโอน</li><li>บัญชีตรวจ Loss</li></ol>
+      </div>
+      <div class="process-col">
+        <div class="col-label">Documents / Systems</div>
+        <div class="tags"><span class="tag">PVM Tracking</span><span class="tag">ERP Inventory</span></div>
+        <div class="inline-note"><b>Purpose:</b> ให้ข้อมูลและหลักฐานของขั้นตอนนี้เชื่อมต่อไปยัง Process ถัดไปได้โดยไม่ขาดช่วง</div>
+      </div>
+      <div class="process-col">
+        <div class="col-label">Control / Accounting</div>
+        <ul><li>Flow ระบุว่าไม่ข้าม Area</li><li>ต้องมีหลักฐานการวัดก่อน–หลัง</li></ul>
+        <div class="entry" style="margin-top:16px">ตู้โอนออก: Dr Fuel Expense / Cr Inventory-Fuel\nตู้รับโอน: Dr Inventory-Fuel / Cr Fuel Expense</div>
+      </div>
+    </div>
+  </div>
+</section>
+<section class="slide" data-page="11" data-title="09 โอนย้ายผู้ดูแลตู้น้ำมัน">
+  <div class="slide-index">09</div>
+  <div class="slide-pad">
+    <div class="eyebrow">OPERATION · PROCESS 09</div>
+    <div class="process-hero">
+      <div class="process-no">09</div>
+      <div><h2>โอนย้ายผู้ดูแลตู้น้ำมัน</h2><div class="process-meta">Owner · ทีม PVM / บัญชี</div></div>
+      <div class="remember-box"><div class="label">Key takeaway</div><strong>“เปลี่ยนคนดูแล ต้องรู้ Stock และเงิน ณ จุดส่งมอบ”</strong></div>
+    </div>
+    <div class="process-grid">
+      <div class="process-col">
+        <div class="col-label">What happens</div>
+        <ol><li>ตรวจนับ Stock</li><li>สรุปยอดเงินคงเหลือ</li><li>ส่งมอบงานและลงนามรับ–ส่ง</li><li>อัปเดตข้อมูลในระบบ</li></ol>
+      </div>
+      <div class="process-col">
+        <div class="col-label">Documents / Systems</div>
+        <div class="tags"><span class="tag">PVM Tracking</span><span class="tag">Hand Over Form</span><span class="tag">Stock Count</span><span class="tag">Cash Balance</span></div>
+        <div class="inline-note"><b>Purpose:</b> ให้ข้อมูลและหลักฐานของขั้นตอนนี้เชื่อมต่อไปยัง Process ถัดไปได้โดยไม่ขาดช่วง</div>
+      </div>
+      <div class="process-col">
+        <div class="col-label">Control / Accounting</div>
+        <ul><li>Flow ระบุว่าต้องจัดทำ Hand Over Form</li><li>บันทึกยอด ณ จุดส่งมอบให้ชัด</li></ul>
+        
+      </div>
+    </div>
+  </div>
+</section>
+<section class="slide" data-page="12" data-title="10 ยกเลิกสัญญา">
+  <div class="slide-index">10</div>
+  <div class="slide-pad">
+    <div class="eyebrow">SETTLEMENT · PROCESS 10</div>
+    <div class="process-hero">
+      <div class="process-no">10</div>
+      <div><h2>ยกเลิกสัญญา</h2><div class="process-meta">Owner · ทีม PVM / บัญชี</div></div>
+      <div class="remember-box"><div class="label">Key takeaway</div><strong>“ปิด Contract + Stock + Cash + Asset ให้ครบ”</strong></div>
+    </div>
+    <div class="process-grid">
+      <div class="process-col">
+        <div class="col-label">What happens</div>
+        <ol><li>ตรวจนับ Stock และโอนไปตู้อื่น</li><li>สรุปยอดเงินคงเหลือ</li><li>แจ้งเจ้าของพื้นที่</li><li>ขนย้ายตู้</li><li>ปิด PVM Tracking</li><li>บัญชีย้าย Location กลับส่วนกลาง</li></ol>
+      </div>
+      <div class="process-col">
+        <div class="col-label">Documents / Systems</div>
+        <div class="tags"><span class="tag">PVM Tracking</span><span class="tag">ERP Asset</span><span class="tag">Inventory</span></div>
+        <div class="inline-note"><b>Purpose:</b> ให้ข้อมูลและหลักฐานของขั้นตอนนี้เชื่อมต่อไปยัง Process ถัดไปได้โดยไม่ขาดช่วง</div>
+      </div>
+      <div class="process-col">
+        <div class="col-label">Control / Accounting</div>
+        <ul><li>ต้องไม่มี Stock/เงินค้างโดยไม่ทราบสถานะ</li><li>Asset Location ต้องกลับสู่สถานะที่ถูกต้อง</li></ul>
+        
+      </div>
+    </div>
+  </div>
+</section>
+<section class="slide" data-page="13" data-title="11 ค่าตอบแทนเจ้าของพื้นที่และ WHT">
+  <div class="slide-index">11</div>
+  <div class="slide-pad">
+    <div class="eyebrow">SETTLEMENT · PROCESS 11</div>
+    <div class="process-hero">
+      <div class="process-no">11</div>
+      <div><h2>ค่าตอบแทนเจ้าของพื้นที่และ WHT</h2><div class="process-meta">Owner · Head Project / SCM / IT / บัญชี / การเงิน</div></div>
+      <div class="remember-box"><div class="label">Key takeaway</div><strong>“ฐานขายถูก → อนุมัติถูก → WHT ถูก → จ่ายถูก”</strong></div>
+    </div>
+    <div class="process-grid">
+      <div class="process-col">
+        <div class="col-label">What happens</div>
+        <ol><li>IT ดึง Sales</li><li>คำนวณยอดขาย/ปริมาณ/ค่าตอบแทน</li><li>Head Project ยืนยัน</li><li>SCM ขออนุมัติใน Alfresco</li><li>IT ออก E-WHT</li><li>บัญชีตั้งหนี้</li><li>การเงินจ่ายและเก็บหลักฐาน</li></ol>
+      </div>
+      <div class="process-col">
+        <div class="col-label">Documents / Systems</div>
+        <div class="tags"><span class="tag">POS / Sales</span><span class="tag">Alfresco</span><span class="tag">E-WHT</span><span class="tag">ERP / Finance</span></div>
+        <div class="inline-note"><b>Purpose:</b> ให้ข้อมูลและหลักฐานของขั้นตอนนี้เชื่อมต่อไปยัง Process ถัดไปได้โดยไม่ขาดช่วง</div>
+      </div>
+      <div class="process-col">
+        <div class="col-label">Control / Accounting</div>
+        <ul><li>ฐานค่าตอบแทนต้องสอดคล้องกับ Sales/Volume</li><li>อนุมัติและ WHT ต้องครบตามกระบวนการ</li></ul>
+        <div class="entry" style="margin-top:16px">Dr 5418001 COMMISSION - PROJECT BRR\nCr 2309013 AP EXPENSE\n\nDr AP / Cr Cash Clearing\nDr Cash Clearing / Cr Bank</div>
+      </div>
+    </div>
   </div>
 </section>
 
-<section class="page" data-page="5" data-title="03 ทำสัญญาเจ้าของพื้นที่">
-  <div class="eyebrow">PAGE 05 · PROCESS 03 · CONTRACT</div>
-  <div class="process-top"><div class="process-title"><div class="stepbig">03</div><h1>ทำสัญญาเจ้าของพื้นที่</h1><p class="lead">Owner: ทีม PVM</p></div><div class="remember"><small>จำง่าย ๆ</small><strong>“Owner + Contract + Location ต้องเป็นข้อมูลชุดเดียวกัน”</strong></div></div>
-  <div class="columns">
-    <div class="box"><h4>ทำอะไร</h4><ol><li>จัดทำและลงนาม Owner Contract</li><li>กรอกแบบขอเปิดสัญญาพื้นที่ใหม่</li><li>บันทึกข้อมูลใน PVM Tracking</li></ol></div>
-    <div class="box"><h4>เอกสารจาก SOP</h4><div class="tags"><span class="tag">สัญญาอนุญาตให้ใช้สถานที่</span><span class="tag">แบบขอเปิดสัญญาพื้นที่</span><span class="tag">Checklist ความถูกต้องสัญญา</span></div></div>
-    <div class="box"><h4>DOA ที่เกี่ยวข้อง</h4><p>สัญญากับบุคคลภายนอก: ใช้กรอบอำนาจอนุมัติหน้า 9 ของ DOA และตรวจผู้ Request / Verify / Approve ตามต้นฉบับ</p></div>
+<section class="slide" data-page="14" data-title="Approval Authority">
+  <div class="slide-index">14</div>
+  <div class="slide-pad">
+    <div class="eyebrow">Delegation of Authority</div>
+    <div class="doa-intro">
+      <div><h1>ใครเสนอ<br>ใครตรวจ<br><span class="accent">ใครอนุมัติ</span></h1><p class="lead">สรุป DOA เฉพาะประเภทธุรกรรมที่เชื่อมกับ Workflow PVM โดยใช้ต้นฉบับ DOA เป็นฐานเมื่อมีรายการจริง</p></div>
+      <div class="avr">
+        <div><b>A</b><strong>Approval</strong><span>ผู้มีอำนาจอนุมัติ</span></div>
+        <div><b>V</b><strong>Verified</strong><span>ผู้ตรวจสอบ/ทวนสอบ</span></div>
+        <div><b>R</b><strong>Requested</strong><span>ผู้จัดทำ/ผู้เสนอรายการ</span></div>
+      </div>
+    </div>
+
+    <div class="doa-section">
+      <h3>Owner Contract · Step 03</h3>
+      <table><tr><th>Role</th><th>Level</th><th>Source</th></tr><tr><td>A</td><td>CEO</td><td>DOA หน้า 9</td></tr><tr><td>V</td><td>CFO, C Level และ Grade 8</td><td>การทำสัญญากับบุคคลภายนอก</td></tr><tr><td>R</td><td>Grade 7 และ Grade 6</td><td>ตรวจต้นฉบับก่อนใช้จริง</td></tr></table>
+    </div>
+
+    <div class="doa-section">
+      <h3>Fixed Asset / Equipment · Step 02–04</h3>
+      <table><tr><th>วงเงิน</th><th>Approval</th><th>Verified</th><th>Requested</th></tr><tr><td>≤ 10 ล้านบาท</td><td>CEO + CFO ร่วม</td><td>C Level</td><td>Grade 8/7/6</td></tr><tr><td>≤ 30 ล้านบาท</td><td>CEO</td><td>CFO + C Level</td><td>Grade 8/7/6</td></tr><tr><td>≤ 50 ล้านบาท</td><td>Ex Com</td><td>CEO + CFO + C Level</td><td>Grade 8/7/6</td></tr><tr><td>> 50 ล้านบาท</td><td>Board + Ex Com</td><td>CEO + CFO + C Level</td><td>Grade 8/7/6</td></tr></table>
+      <div class="inline-note">DOA หน้า 12 ระบุให้จัดทำ <b>Appropriation Request (AR)</b> ต่อครั้ง / ต่อโครงการ</div>
+    </div>
+
+    <div class="doa-section">
+      <h3>Advance · Step 05</h3>
+      <table><tr><th>วงเงินต่อครั้ง / ต่อคน</th><th>A</th><th>V</th><th>R</th></tr><tr><td>≤ 50,000 บาท</td><td>Grade 8</td><td>Grade 6</td><td>Grade 3</td></tr><tr><td>50,000–300,000 บาท</td><td>C Level</td><td>Grade 6</td><td>Grade 3</td></tr><tr><td>> 300,000 บาท</td><td>CEO</td><td>Grade 6</td><td>Grade 3</td></tr></table>
+    </div>
   </div>
 </section>
 
-<section class="page" data-page="6" data-title="04 ติดตั้งตู้น้ำมัน">
-  <div class="eyebrow">PAGE 06 · PROCESS 04 · INSTALLATION</div>
-  <div class="process-top"><div class="process-title"><div class="stepbig">04</div><h1>ติดตั้งตู้น้ำมัน</h1><p class="lead">Owner: บัญชี / จัดซื้อ / ทีม PVM</p></div><div class="remember"><small>จำง่าย ๆ</small><strong>“ระบบกับของจริงต้องตรงกัน ก่อนเปิดขาย”</strong></div></div>
-  <div class="columns">
-    <div class="box"><h4>ทำอะไร</h4><ol><li>บัญชีสร้าง Location และโอนย้ายตู้ใน ERP</li><li>เติมน้ำมัน 0.01 ลิตรในระบบตาม Flow</li><li>จัดซื้อสร้าง Item Code</li><li>PVM เติมน้ำมันเข้าตู้</li><li>ติดตั้ง ทดสอบ ตั้งค่ารวมถึงราคาขาย</li><li>ส่งมอบผู้ดูแล</li></ol></div>
-    <div class="box"><h4>หลักฐาน</h4><div class="tags"><span class="tag">Email อนุมัติ</span><span class="tag">Excel จุดติดตั้ง</span><span class="tag">Timestamp Photo</span><span class="tag">Installation Evidence</span></div></div>
-    <div class="box"><h4>Control</h4><ul><li>ERP Location + Serial + จุดติดตั้งจริงต้องสัมพันธ์กัน</li><li>ต้องมีหลักฐานการติดตั้ง/ทดสอบ/ตั้งค่า</li></ul></div>
+<section class="slide" data-page="15" data-title="Documents & Examples">
+  <div class="slide-index">15</div>
+  <div class="slide-pad">
+    <div class="eyebrow">Reference Library</div>
+    <h1>เอกสารที่ใช้<br><span class="accent">สอนงานให้เห็นของจริง</span></h1>
+    <p class="lead">หัวข้อต่อไปนี้มาจาก SOP PVM และใช้เป็นตัวอย่างประกอบเมื่อต้องอธิบายแต่ละ Process</p>
+    <div class="docs">
+      <div class="doc"><div class="doc-no">01</div><h3>Owner Contract</h3><p>สัญญาอนุญาตให้ใช้สถานที่ · แบบขอเปิดสัญญา · Checklist สัญญา</p></div><div class="doc"><div class="doc-no">02</div><h3>Site Assessment</h3><p>Checklist ประเมินความเหมาะสมของจุดติดตั้ง</p></div><div class="doc"><div class="doc-no">03</div><h3>Asset Requisition</h3><p>Email ขออนุมัติ · Excel จุดติดตั้ง · Timestamp Photo</p></div><div class="doc"><div class="doc-no">04</div><h3>Advance / Payment</h3><p>PV · แบบเบิกค่าใช้จ่าย · ใบเสร็จ/ใบกำกับภาษี</p></div><div class="doc"><div class="doc-no">05</div><h3>Fuel Purchase</h3><p>รายละเอียดปริมาณ/ราคา · เอกสารสถานีบริการ</p></div><div class="doc"><div class="doc-no">06</div><h3>PVM Asset Database</h3><p>Serial Number · Shop/Location · Fuel Type · Vendor</p></div><div class="doc"><div class="doc-no">07</div><h3>Machine Setup</h3><p>หน้าจอตั้งค่า · ราคา · วันเวลา · การทดสอบจ่ายน้ำมัน</p></div><div class="doc"><div class="doc-no">08</div><h3>Cash Collection</h3><p>Timestamp · รายงานยอดขาย · QR · Email แจ้งนำส่ง</p></div><div class="doc"><div class="doc-no">09</div><h3>Repair / Maintenance</h3><p>ตัวอย่างแจ้งซ่อมและการดูแลตู้ระหว่างใช้งาน</p></div><div class="doc"><div class="doc-no">10</div><h3>Government Permit</h3><p>แบบฟอร์มและกระบวนการแจ้งกิจการควบคุมประเภทที่ 2</p></div><div class="doc"><div class="doc-no">11</div><h3>Workflow + Accounting</h3><p>เจ้าของงาน · System · Accounting Entry ใน 11 Process</p></div><div class="doc"><div class="doc-no">12</div><h3>Delegation of Authority</h3><p>A / V / R สำหรับ Contract · Asset · Advance</p></div>
+    </div>
+    <div class="inline-note" style="margin-top:22px"><b>Training note:</b> Playbook นี้ใช้เพื่อทำความเข้าใจภาพรวมและลำดับงาน ไม่ใช้แทน SOP / Workflow / DOA ต้นฉบับในการอนุมัติรายการจริง</div>
   </div>
-</section>
-
-<section class="page" data-page="7" data-title="05 Advance ซื้อน้ำมัน">
-  <div class="eyebrow">PAGE 07 · PROCESS 05 · OPERATION</div>
-  <div class="process-top"><div class="process-title"><div class="stepbig">05</div><h1>Advance เพื่อซื้อน้ำมัน</h1><p class="lead">Owner: บัญชี / Head Project</p></div><div class="remember"><small>จำง่าย ๆ</small><strong>“ยืมเงิน → ซื้อจริง → มีหลักฐาน → เคลียร์ให้ครบ”</strong></div></div>
-  <div class="columns">
-    <div class="box"><h4>ทำอะไร</h4><ol><li>เบิก Advance</li><li>ขออนุมัติ</li><li>ซื้อน้ำมัน</li><li>เติมเข้าตู้</li><li>รวบรวมหลักฐาน</li><li>เคลียร์ Advance</li></ol></div>
-    <div class="box"><h4>เอกสาร</h4><div class="tags"><span class="tag">PV</span><span class="tag">ใบเสร็จ/ใบกำกับภาษี</span><span class="tag">รายละเอียดปริมาณ/ราคา</span><span class="tag">หลักฐานเติมน้ำมัน</span></div></div>
-    <div class="box"><h4>DOA</h4><p>วงเงิน Advance ต่อครั้ง/ต่อคนให้ตรวจตาม DOA หน้า 23–24</p><div class="note">≤ 50,000 / 50,000–300,000 / > 300,000 บาท ใช้ระดับอนุมัติต่างกัน</div></div>
-  </div>
-</section>
-
-<section class="page" data-page="8" data-title="06 ซื้อน้ำมันเข้าตู้">
-  <div class="eyebrow">PAGE 08 · PROCESS 06 · OPERATION</div>
-  <div class="process-top"><div class="process-title"><div class="stepbig">06</div><h1>ซื้อน้ำมันเข้าตู้</h1><p class="lead">Owner: ทีม PVM / บัญชี / จัดซื้อ</p></div><div class="remember"><small>จำง่าย ๆ</small><strong>“ซื้อมากี่ลิตร ต้องรู้ว่าเติมเข้าตู้ไหน และเข้าระบบเท่าไร”</strong></div></div>
-  <div class="columns">
-    <div class="box"><h4>ทำอะไร</h4><ol><li>เติมน้ำมันเข้าตู้</li><li>บันทึกใน PVM Tracking</li><li>ส่งเอกสารตรวจเช็กน้ำมันและใบเสร็จให้จัดซื้อ</li><li>จัดซื้อตรวจสอบ</li><li>บัญชีเคลียร์ Advance</li></ol></div>
-    <div class="box"><h4>ระบบ</h4><div class="tags"><span class="tag">PVM Tracking</span><span class="tag">ERP Inventory</span></div><p>ปริมาณซื้อ/เติม/บันทึก Inventory ต้องสัมพันธ์กัน</p></div>
-    <div class="box"><h4>Accounting</h4><div class="account">Dr 1401024 INVENTORY - FUEL
-Cr 2201008 SUSPENSE INVENTORY AP ACCRUAL</div></div>
-  </div>
-</section>
-
-<section class="page" data-page="9" data-title="07 ขายและนำส่งรายได้">
-  <div class="eyebrow">PAGE 09 · PROCESS 07 · OPERATION</div>
-  <div class="process-top"><div class="process-title"><div class="stepbig">07</div><h1>ขายและนำส่งรายได้</h1><p class="lead">Owner: ทีม PVM / ฝ่ายกำกับสาขา</p></div><div class="remember"><small>จำง่าย ๆ</small><strong>“ขายเท่าไร เงินต้องเข้าบริษัทเท่านั้น และ Match ได้”</strong></div></div>
-  <div class="columns">
-    <div class="box"><h4>ทำอะไร</h4><ol><li>ลูกค้าเติมน้ำมัน</li><li>POS บันทึกยอดขาย</li><li>สร้าง Task งานเก็บเงิน</li><li>นำส่งผ่าน QR Code</li><li>ฝ่ายกำกับสาขา Match ยอด</li><li>Bank Reconcile</li></ol></div>
-    <div class="box"><h4>เส้นทางข้อมูล</h4><div class="tags"><span class="tag">POS</span><span class="tag">PVM Tracking</span><span class="tag">QR</span><span class="tag">Bank</span><span class="tag">GL</span></div><div class="note">POS → QR → Bank → GL ต้องสามารถกระทบยอดกันได้</div></div>
-    <div class="box"><h4>Accounting</h4><div class="account">Cash in Transit + Fuel Revenue + VAT Output
-Fuel Expense / Inventory-Fuel
-Cash Clearing / Bank
-Cash Under Remitted (กรณีขาด)</div></div>
-  </div>
-</section>
-
-<section class="page" data-page="10" data-title="08 โอนย้ายน้ำมัน">
-  <div class="eyebrow">PAGE 10 · PROCESS 08 · OPERATION</div>
-  <div class="process-top"><div class="process-title"><div class="stepbig">08</div><h1>โอนย้ายน้ำมันระหว่างตู้</h1><p class="lead">Owner: ทีม PVM / บัญชี</p></div><div class="remember"><small>จำง่าย ๆ</small><strong>“ก่อนย้าย–หลังย้าย ต้องรู้ปริมาณ และต้องรู้ Loss”</strong></div></div>
-  <div class="columns">
-    <div class="box"><h4>ทำอะไร</h4><ol><li>ตรวจ Stock ต้นทาง/ปลายทาง</li><li>ขออนุมัติ</li><li>ขนย้าย</li><li>วัดปริมาณก่อน–หลัง</li><li>บันทึกการโอน</li><li>บัญชีตรวจ Loss</li></ol></div>
-    <div class="box"><h4>เงื่อนไขจาก Flow</h4><div class="note"><b>ไม่ข้าม Area</b></div><p>ควรมีหลักฐานการวัดและบันทึกต้นทาง/ปลายทางครบ</p></div>
-    <div class="box"><h4>Accounting</h4><div class="account">ตู้โอนออก:
-Dr Fuel Expense
-Cr Inventory-Fuel
-
-ตู้รับโอน:
-Dr Inventory-Fuel
-Cr Fuel Expense</div></div>
-  </div>
-</section>
-
-<section class="page" data-page="11" data-title="09 เปลี่ยนผู้ดูแล">
-  <div class="eyebrow">PAGE 11 · PROCESS 09 · OPERATION</div>
-  <div class="process-top"><div class="process-title"><div class="stepbig">09</div><h1>โอนย้ายผู้ดูแลตู้น้ำมัน</h1><p class="lead">Owner: ทีม PVM / บัญชี</p></div><div class="remember"><small>จำง่าย ๆ</small><strong>“เปลี่ยนคนดูแล ต้องรู้ Stock และเงิน ณ จุดส่งมอบ”</strong></div></div>
-  <div class="columns">
-    <div class="box"><h4>ทำอะไร</h4><ol><li>ตรวจนับ Stock</li><li>สรุปยอดเงินคงเหลือ</li><li>ส่งมอบงานและลงนามเอกสารรับ–ส่ง</li><li>อัปเดตข้อมูลในระบบ</li></ol></div>
-    <div class="box"><h4>เอกสาร</h4><div class="tags"><span class="tag">Hand Over Form</span><span class="tag">Stock Count</span><span class="tag">Cash Balance</span></div></div>
-    <div class="box"><h4>Control</h4><p>Flow ระบุชัดว่า <b>ต้องจัดทำแบบฟอร์ม Hand Over</b> เพื่อรองรับการรับ–ส่ง</p></div>
-  </div>
-</section>
-
-<section class="page" data-page="12" data-title="10 ยกเลิกสัญญา">
-  <div class="eyebrow">PAGE 12 · PROCESS 10 · SETTLEMENT</div>
-  <div class="process-top"><div class="process-title"><div class="stepbig">10</div><h1>ยกเลิกสัญญา</h1><p class="lead">Owner: ทีม PVM / บัญชี</p></div><div class="remember"><small>จำง่าย ๆ</small><strong>“ปิด Contract + Stock + Cash + Asset ให้ครบ”</strong></div></div>
-  <div class="columns">
-    <div class="box"><h4>ทำอะไร</h4><ol><li>ตรวจนับ Stock และโอนน้ำมันไปตู้อื่น</li><li>สรุปยอดเงินคงเหลือ</li><li>แจ้งเจ้าของพื้นที่</li><li>ขนย้ายตู้ออกจากพื้นที่</li><li>ปิดสัญญาใน PVM Tracking</li><li>บัญชีย้าย Location กลับส่วนกลาง</li></ol></div>
-    <div class="box"><h4>ระบบ</h4><div class="tags"><span class="tag">PVM Tracking</span><span class="tag">ERP Asset</span><span class="tag">Inventory</span></div></div>
-    <div class="box"><h4>จุดควบคุม</h4><ul><li>ต้องไม่มี Stock/เงินค้างที่จุดยกเลิกโดยไม่ทราบสถานะ</li><li>Asset Location ต้องกลับสู่สถานะที่ถูกต้อง</li></ul></div>
-  </div>
-</section>
-
-<section class="page" data-page="13" data-title="11 ค่าตอบแทนและ WHT">
-  <div class="eyebrow">PAGE 13 · PROCESS 11 · SETTLEMENT</div>
-  <div class="process-top"><div class="process-title"><div class="stepbig">11</div><h1>ค่าตอบแทนเจ้าของพื้นที่และ WHT</h1><p class="lead">Owner: Head Project / SCM / IT / บัญชี / การเงิน</p></div><div class="remember"><small>จำง่าย ๆ</small><strong>“ฐานขายถูก → อนุมัติถูก → WHT ถูก → จ่ายถูก”</strong></div></div>
-  <div class="columns">
-    <div class="box"><h4>ทำอะไร</h4><ol><li>IT ดึง Sales</li><li>คำนวณยอดขาย/ปริมาณ/ค่าตอบแทน</li><li>Head Project ยืนยัน</li><li>SCM จัดทำคำขออนุมัติใน Alfresco</li><li>IT Run E-WHT</li><li>บัญชีตั้งหนี้</li><li>การเงินจ่ายและเก็บหลักฐาน</li></ol></div>
-    <div class="box"><h4>ระบบ</h4><div class="tags"><span class="tag">POS / Sales</span><span class="tag">Alfresco</span><span class="tag">E-WHT</span><span class="tag">ERP / Finance</span></div></div>
-    <div class="box"><h4>Accounting</h4><div class="account">Dr 5418001 COMMISSION - PROJECT BRR
-Cr 2309013 AP EXPENSE
-
-Dr AP / Cr Cash Clearing
-Dr Cash Clearing / Cr Bank</div></div>
-  </div>
-</section>
-
-<section class="page" data-page="14" data-title="อำนาจอนุมัติที่เกี่ยวข้อง">
-  <div class="eyebrow">PAGE 14 · DELEGATION OF AUTHORITY</div>
-  <h1>อำนาจอนุมัติที่เกี่ยวกับ <span class="accent">PVM</span></h1>
-  <p class="lead">สรุปเฉพาะรายการที่เชื่อมกับ Workflow โดยยึด “ประเภทธุรกรรม” ของ DOA; เมื่อลงนาม/อนุมัติจริงต้องตรวจต้นฉบับ DOA อีกครั้ง</p>
-  <div class="legend"><div class="card"><strong>A</strong><h3>Approval</h3><p>ผู้มีอำนาจอนุมัติ</p></div><div class="card"><strong>V</strong><h3>Verified</h3><p>ผู้ตรวจสอบ/ทวนสอบ</p></div><div class="card"><strong>R</strong><h3>Requested</h3><p>ผู้จัดทำ/ผู้เสนอ</p></div></div>
-  <h3 style="margin-top:20px">1) สัญญากับเจ้าของพื้นที่ — Step 03</h3>
-  <table><tr><th>Role</th><th>ระดับ</th></tr><tr><td>A</td><td>CEO</td></tr><tr><td>V</td><td>CFO, C Level และ Grade 8</td></tr><tr><td>R</td><td>Grade 7 และ Grade 6</td></tr></table>
-  <h3>2) ซื้อสินทรัพย์/เครื่องมือ/อุปกรณ์ — Step 02 / 04</h3>
-  <table><tr><th>วงเงิน</th><th>A</th><th>V</th><th>R</th></tr><tr><td>≤ 10 ล้านบาท</td><td>CEO + CFO ร่วม</td><td>C Level</td><td>Grade 8/7/6</td></tr><tr><td>≤ 30 ล้านบาท</td><td>CEO</td><td>CFO + C Level</td><td>Grade 8/7/6</td></tr><tr><td>≤ 50 ล้านบาท</td><td>Ex Com</td><td>CEO + CFO + C Level</td><td>Grade 8/7/6</td></tr><tr><td>> 50 ล้านบาท</td><td>Board + Ex Com</td><td>CEO + CFO + C Level</td><td>Grade 8/7/6</td></tr></table>
-  <h3>3) ยืมเงินทดรองจ่าย — Step 05</h3>
-  <table><tr><th>วงเงินต่อครั้ง/ต่อคน</th><th>A</th><th>V</th><th>R</th></tr><tr><td>≤ 50,000 บาท</td><td>Grade 8</td><td>Grade 6</td><td>Grade 3</td></tr><tr><td>50,000–300,000 บาท</td><td>C Level</td><td>Grade 6</td><td>Grade 3</td></tr><tr><td>> 300,000 บาท</td><td>CEO</td><td>Grade 6</td><td>Grade 3</td></tr></table>
-  <div class="note">Fixed Asset: DOA ระบุให้จัดทำ <b>Appropriation Request (AR)</b> ต่อครั้ง / ต่อโครงการ</div>
-</section>
-
-<section class="page" data-page="15" data-title="เอกสารและตัวอย่าง">
-  <div class="eyebrow">PAGE 15 · DOCUMENTS & EXAMPLES</div>
-  <h1>เอกสาร / ตัวอย่าง <span class="accent">ที่ใช้สอนงาน</span></h1>
-  <p class="lead">หัวข้อต่อไปนี้ปรากฏใน SOP PVM 57 หน้าและใช้เป็นจุดอ้างอิงเมื่ออธิบายแต่ละ Process</p>
-  <div class="docgrid">
-    <div class="doc"><b>Owner Contract</b><small>ตัวอย่างสัญญาอนุญาตให้ใช้สถานที่ + แบบขอเปิดสัญญา + Checklist สัญญา</small></div>
-    <div class="doc"><b>Site Assessment</b><small>Checklist ประเมินความเหมาะสมของจุดติดตั้ง</small></div>
-    <div class="doc"><b>Asset Requisition</b><small>Email ขออนุมัติ + Excel รายการจุดติดตั้ง + Timestamp Photo</small></div>
-    <div class="doc"><b>Advance / Payment</b><small>PV + แบบเบิกค่าใช้จ่าย + ใบเสร็จ/ใบกำกับภาษี</small></div>
-    <div class="doc"><b>Fuel Purchase</b><small>รายละเอียดปริมาณ/ราคา + PV + เอกสารสถานีบริการ</small></div>
-    <div class="doc"><b>PVM Asset Database</b><small>Serial Number POS, Shop/Location, Fuel Type, Vendor และข้อมูล Asset</small></div>
-    <div class="doc"><b>Machine Setup</b><small>หน้าจอตั้งค่า ราคา วันเวลา และการทดสอบจ่ายน้ำมัน</small></div>
-    <div class="doc"><b>Cash Collection</b><small>Timestamp Camera + รายงานยอด + QR Code + Email แจ้งนำส่ง</small></div>
-    <div class="doc"><b>Repair / Maintenance</b><small>ตัวอย่างการแจ้งซ่อมและการดูแลตู้ระหว่างใช้งาน</small></div>
-    <div class="doc"><b>Government Permit</b><small>กระบวนการขออนุญาต/แจ้งการประกอบกิจการควบคุมประเภทที่ 2</small></div>
-    <div class="doc"><b>Workflow + Accounting</b><small>ใช้เป็นแกนหลักของ 11 Process, Owner, System และ Journal Entry</small></div>
-    <div class="doc"><b>Delegation of Authority</b><small>ใช้ตรวจ A / V / R สำหรับ Contract, Fixed Asset และ Advance ที่เกี่ยวข้อง</small></div>
-  </div>
-  <div class="note"><b>หมายเหตุ:</b> Training Book นี้ใช้เพื่ออธิบายภาพรวมและลำดับงาน ไม่ใช้แทน SOP / Workflow / DOA ต้นฉบับเมื่อต้องปฏิบัติหรืออนุมัติรายการจริง</div>
 </section>
 
 </main>
 
-<nav class="bottomnav">
+<nav class="bottombar">
   <div class="bottominner">
-    <button class="btn" id="prevBtn">← ก่อนหน้า</button>
-    <div>
-      <div class="pills" id="pills"></div>
-      <div class="page-label"><span id="pageTitle">ภาพรวมโครงการ</span> · <button class="btn primary" id="workflowBtn" style="padding:5px 9px;margin-left:6px">กลับ Workflow</button></div>
-    </div>
-    <button class="btn next" id="nextBtn">ถัดไป →</button>
+    <button class="navbtn" id="prev">← ก่อนหน้า</button>
+    <div class="center-nav"><div class="dots" id="dots"></div><button class="workflow-btn" id="workflowBtn">Workflow</button></div>
+    <button class="navbtn next" id="next">ถัดไป →</button>
   </div>
 </nav>
+</div>
+</div>
 
 <script>
 const total=15;
-let currentPage=1;
-const pages=[...document.querySelectorAll('.page')];
-const pills=document.getElementById('pills');
-for(let i=1;i<=total;i++){
-  const b=document.createElement('button'); b.className='pill'; b.title='หน้า '+i; b.dataset.goto=i; pills.appendChild(b);
-}
-function clamp(n){return Math.max(1,Math.min(total,n))}
-function showPage(n, push=true){
-  currentPage=clamp(Number(n)||1);
-  pages.forEach(p=>p.classList.toggle('active',Number(p.dataset.page)===currentPage));
-  document.querySelectorAll('.pill').forEach(p=>p.classList.toggle('active',Number(p.dataset.goto)===currentPage));
-  document.getElementById('prevBtn').disabled=currentPage===1;
-  document.getElementById('nextBtn').disabled=currentPage===total;
-  const active=pages.find(p=>Number(p.dataset.page)===currentPage);
-  document.getElementById('topCounter').textContent=String(currentPage).padStart(2,'0')+' / '+total;
-  document.getElementById('pageTitle').textContent=active?.dataset.title||'';
-  document.getElementById('progressBar').style.width=(currentPage/total*100)+'%';
-  if(push) history.replaceState(null,'','#page-'+currentPage);
+let current=1;
+const slides=[...document.querySelectorAll('.slide')];
+const dots=document.getElementById('dots');
+for(let i=1;i<=total;i++){const b=document.createElement('button');b.className='dot';b.dataset.goto=i;b.title='หน้า '+i;dots.appendChild(b)}
+function show(n,push=true){
+  current=Math.max(1,Math.min(total,Number(n)||1));
+  slides.forEach(s=>s.classList.toggle('active',Number(s.dataset.page)===current));
+  document.querySelectorAll('.dot').forEach(d=>d.classList.toggle('active',Number(d.dataset.goto)===current));
+  document.querySelectorAll('.chapter').forEach(c=>{
+    const start=Number(c.dataset.goto);
+    let active=false;
+    if(start===1) active=current===1;
+    else if(start===2) active=current===2;
+    else if(start===3) active=current>=3&&current<=6;
+    else if(start===7) active=current>=7&&current<=10;
+    else if(start===11) active=current>=11&&current<=13;
+    else active=current===start;
+    c.classList.toggle('active',active);
+  });
+  const s=slides.find(x=>Number(x.dataset.page)===current);
+  document.getElementById('counter').textContent=String(current).padStart(2,'0')+' / '+total;
+  document.getElementById('topTitle').textContent=s?.dataset.title||'PVM Training Playbook';
+  document.getElementById('progress').style.width=(current/total*100)+'%';
+  document.getElementById('prev').disabled=current===1;
+  document.getElementById('next').disabled=current===total;
+  if(push) history.replaceState(null,'','#page-'+current);
   window.scrollTo({top:0,behavior:'smooth'});
 }
-document.addEventListener('click',e=>{
-  const g=e.target.closest('[data-goto]');
-  if(g){e.preventDefault();showPage(g.dataset.goto)}
-});
-document.getElementById('prevBtn').onclick=()=>showPage(currentPage-1);
-document.getElementById('nextBtn').onclick=()=>showPage(currentPage+1);
-document.getElementById('workflowBtn').onclick=()=>showPage(2);
-document.addEventListener('keydown',e=>{
-  if(e.key==='ArrowLeft') showPage(currentPage-1);
-  if(e.key==='ArrowRight') showPage(currentPage+1);
-  if(e.key==='Home') showPage(1);
-});
-const m=location.hash.match(/page-(\d+)/); showPage(m?m[1]:1,false);
+document.addEventListener('click',e=>{const g=e.target.closest('[data-goto]');if(g){e.preventDefault();show(g.dataset.goto)}});
+document.getElementById('prev').onclick=()=>show(current-1);
+document.getElementById('next').onclick=()=>show(current+1);
+document.getElementById('workflowBtn').onclick=()=>show(2);
+document.addEventListener('keydown',e=>{if(e.key==='ArrowLeft')show(current-1);if(e.key==='ArrowRight')show(current+1);if(e.key==='Home')show(1)});
+window.addEventListener('hashchange',()=>{const m=location.hash.match(/page-(\d+)/);if(m)show(m[1],false)});
+const m=location.hash.match(/page-(\d+)/);show(m?m[1]:1,false);
 </script>
 </body>
 </html>
