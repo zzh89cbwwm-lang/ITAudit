@@ -1,15 +1,334 @@
-<!doctype html><html lang="th"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>SINGER PVM Training Portal</title><style>
-:root{--bg:#f5f2eb;--paper:#fffdf8;--ink:#22211f;--muted:#6f6a63;--line:#d8d1c6;--rust:#b64c36;--dark:#292927;--gray:#5f5b55}*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:var(--bg);color:var(--ink);font-family:Tahoma,"Noto Sans Thai",sans-serif;line-height:1.55}header{position:sticky;top:0;z-index:10;background:#22211f;color:#fff}.wrap{max-width:1500px;margin:auto;padding:0 24px}.top{display:flex;gap:18px;align-items:center;padding:12px 0}.brand{font-weight:900}.brand span{color:#d86a51}.nav{display:flex;gap:7px;flex-wrap:wrap}.nav a{color:#fff;text-decoration:none;border:1px solid #55524e;border-radius:999px;padding:7px 10px;font-size:12px}.nav a:hover{background:var(--rust)}main{max-width:1500px;margin:auto;padding:28px 24px}.hero,.section{background:var(--paper);border:1px solid var(--line);padding:30px;margin:0 0 18px}.hero{padding:42px}.eyebrow{font-size:11px;letter-spacing:.12em;font-weight:900;color:var(--muted)}h1{font-size:clamp(40px,5vw,72px);line-height:1.05;margin:10px 0}h2{font-size:28px;margin:0 0 18px}.accent{color:var(--rust)}.hero p{font-size:18px;color:var(--muted);max-width:1050px}.phase{display:grid;grid-template-columns:3fr 2fr 5fr 2fr;margin:18px 0}.phase div{padding:14px;color:#fff}.contract{background:var(--dark)}.install{background:var(--gray)}.operation{background:var(--rust)}.settlement{background:#8e392b}.grid{display:grid;gap:12px}.g4{grid-template-columns:repeat(4,1fr)}.g3{grid-template-columns:repeat(3,1fr)}.card{background:#fff;border:1px solid var(--line);padding:18px}.card p{margin:0;color:var(--muted);font-size:13px}.workflow{display:grid;grid-template-columns:repeat(11,minmax(165px,1fr));gap:8px;overflow-x:auto}.step{min-width:165px;min-height:150px;color:#fff;padding:14px;text-decoration:none;display:flex;flex-direction:column;gap:7px}.step span{width:29px;height:29px;border-radius:50%;background:#ffffff2b;display:grid;place-items:center;font-weight:900}.step small{margin-top:auto;opacity:.86}.notice{border-left:5px solid var(--rust);background:#fff5ef;padding:14px 16px;margin:14px 0}.detail{background:#fff;border:1px solid var(--line);margin:14px 0}.head{padding:15px;color:#fff;display:flex;gap:12px;align-items:center}.no{font-size:30px;font-weight:900}.body{display:grid;grid-template-columns:1.5fr 1fr 1fr}.body>div{padding:16px;border-right:1px solid var(--line)}.body>div:last-child{border-right:0}.body h4{font-size:11px;color:var(--muted);text-transform:uppercase;margin:0 0 8px}.body ul{margin:0;padding-left:18px;font-size:13px}.tag{display:inline-block;border:1px solid var(--line);border-radius:999px;padding:4px 7px;font-size:11px;margin:2px}table{width:100%;border-collapse:collapse;background:#fff;font-size:12px;margin:10px 0 20px}th,td{border:1px solid var(--line);padding:9px;text-align:left;vertical-align:top}th{background:#eee9e1}.legend{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}.legend strong{font-size:27px;color:var(--rust)}.footer{max-width:1500px;margin:auto;padding:10px 24px 40px;color:var(--muted);font-size:11px}@media(max-width:900px){.g4,.g3,.legend,.body{grid-template-columns:1fr 1fr}.phase{grid-template-columns:1fr 1fr}}@media(max-width:620px){.g4,.g3,.legend,.body{grid-template-columns:1fr}.hero{padding:24px}.phase{grid-template-columns:1fr}main{padding:14px}.wrap{padding:0 14px}}</style></head><body>
-<header><div class="wrap top"><div class="brand">SINGER <span>· PVM</span></div><nav class="nav"><a href="#summary">สรุปสอนงาน</a><a href="#workflow">Workflow</a><a href="#details">11 ขั้นตอน</a><a href="#doa">อำนาจอนุมัติ</a><a href="#sources">แหล่งข้อมูล</a></nav></div></header><main>
-<section id="summary" class="hero"><div class="eyebrow">PVM TRAINING PORTAL</div><h1>เข้าใจโครงการ <span class="accent">ตู้น้ำมัน PVM</span></h1><p>สรุปเพื่อใช้สอนงาน ตั้งแต่สำรวจพื้นที่และทำสัญญา → เบิกและติดตั้งตู้ → เติมน้ำมันและขาย → รับเงินและกระทบยอด → ดูแล Stock → ยกเลิกสัญญา → จ่ายค่าตอบแทนและ WHT</p></section>
-<section class="section"><h2>ภาพรวมใน 60 วินาที</h2><div class="phase"><div class="contract"><b>CONTRACT</b><br><small>สำรวจ · เบิกตู้ · สัญญา</small></div><div class="install"><b>INSTALLATION</b><br><small>Location · ติดตั้ง · ทดสอบ</small></div><div class="operation"><b>OPERATION</b><br><small>Advance · Fuel · Sales · Transfer · Hand Over</small></div><div class="settlement"><b>SETTLEMENT</b><br><small>ยกเลิก · Commission · WHT</small></div></div><div class="grid g4"><div class="card"><b>ตู้ต้องรู้ว่าอยู่ที่ไหน</b><p>Serial, ERP Location และจุดติดตั้งจริงต้องตรงกัน</p></div><div class="card"><b>น้ำมันต้องรู้ว่าไปไหน</b><p>ซื้อ เติม ขาย โอน และ Loss ต้องตามย้อนหลังได้</p></div><div class="card"><b>เงินต้องเข้าครบ</b><p>POS → QR → Match → Bank → GL ต้องกระทบยอดกันได้</p></div><div class="card"><b>สัญญาต้องปิดครบ</b><p>Stock, Cash, Asset Location และค่าตอบแทนต้องเคลียร์ก่อนจบ</p></div></div></section>
-<section id="workflow" class="section"><h2>Workflow รวม 11 ขั้นตอน</h2><div class="workflow">
-<a class="step contract" href="#p1"><span>01</span><b>สำรวจพื้นที่</b><small>ทีม PVM</small></a><a class="step contract" href="#p2"><span>02</span><b>เบิกตู้น้ำมัน</b><small>บัญชี / SCM / PVM</small></a><a class="step contract" href="#p3"><span>03</span><b>ทำสัญญาเจ้าของพื้นที่</b><small>ทีม PVM</small></a><a class="step install" href="#p4"><span>04</span><b>ติดตั้งตู้น้ำมัน</b><small>บัญชี / จัดซื้อ / PVM</small></a><a class="step operation" href="#p5"><span>05</span><b>Advance ซื้อน้ำมัน</b><small>บัญชี / Head Project</small></a><a class="step operation" href="#p6"><span>06</span><b>ซื้อน้ำมันเข้าตู้</b><small>PVM / บัญชี / จัดซื้อ</small></a><a class="step operation" href="#p7"><span>07</span><b>ขายและนำส่งรายได้</b><small>PVM / กำกับสาขา</small></a><a class="step operation" href="#p8"><span>08</span><b>โอนย้ายน้ำมัน</b><small>PVM / บัญชี</small></a><a class="step operation" href="#p9"><span>09</span><b>เปลี่ยนผู้ดูแล</b><small>PVM / บัญชี</small></a><a class="step settlement" href="#p10"><span>10</span><b>ยกเลิกสัญญา</b><small>PVM / บัญชี</small></a><a class="step settlement" href="#p11"><span>11</span><b>ค่าตอบแทน + WHT</b><small>Project / SCM / IT / Finance</small></a></div><div class="notice"><b>เส้นข้อมูลหลัก:</b> Owner/Contract → Asset/Location → Fuel Inventory → POS/Revenue → QR/Bank → GL → Commission/WHT → Closure</div></section>
-<section id="details" class="section"><h2>รายละเอียด 11 ขั้นตอน</h2>
-<article id="p1" class="detail"><div class="head contract"><div class="no">01</div><div><small>CONTRACT</small><h3>สำรวจพื้นที่</h3><small>ทีม PVM</small></div></div><div class="body"><div><h4>ขั้นตอน</h4><ul><li>สำรวจพื้นที่</li><li>เก็บข้อมูลเจ้าของพื้นที่</li><li>ประเมินศักยภาพทำเล</li><li>ติดต่อเจ้าของพื้นที่เพื่อติดตั้งตู้</li></ul></div><div><h4>ระบบ/เครื่องมือ</h4><span class="tag">Checklist</span><span class="tag">Evidence</span></div><div><h4>สิ่งที่ต้องจำ</h4><p>ทำเลต้องผ่านการประเมินก่อนเริ่มสัญญา</p></div></div></article><article id="p2" class="detail"><div class="head contract"><div class="no">02</div><div><small>CONTRACT</small><h3>เบิกตู้น้ำมัน PVM</h3><small>บัญชี / SCM / ทีม PVM</small></div></div><div class="body"><div><h4>ขั้นตอน</h4><ul><li>เบิก Advance เพื่อติดตั้ง</li><li>แจ้ง Head Project</li><li>SCM ตรวจ Asset คงเหลือ</li><li>ถ้าไม่พอให้ Drop Fixed Asset</li></ul></div><div><h4>ระบบ/เครื่องมือ</h4><span class="tag">ERP</span><span class="tag">Asset</span><span class="tag">Finance</span></div><div><h4>สิ่งที่ต้องจำ</h4><p>ติดตาม Advance และ Asset/Serial ให้สัมพันธ์กับตู้จริง</p></div></div></article><article id="p3" class="detail"><div class="head contract"><div class="no">03</div><div><small>CONTRACT</small><h3>ทำสัญญาเจ้าของพื้นที่</h3><small>ทีม PVM</small></div></div><div class="body"><div><h4>ขั้นตอน</h4><ul><li>จัดทำและลงนามสัญญา</li><li>กรอกแบบเปิดสัญญาใหม่</li><li>บันทึก PVM Tracking</li></ul></div><div><h4>ระบบ/เครื่องมือ</h4><span class="tag">PVM Tracking</span><span class="tag">Contract</span></div><div><h4>สิ่งที่ต้องจำ</h4><p>Owner + Contract + Location ต้องเป็นข้อมูลชุดเดียวกัน</p></div></div></article><article id="p4" class="detail"><div class="head install"><div class="no">04</div><div><small>INSTALL</small><h3>ติดตั้งตู้น้ำมัน</h3><small>บัญชี / จัดซื้อ / ทีม PVM</small></div></div><div class="body"><div><h4>ขั้นตอน</h4><ul><li>บัญชีสร้าง Location ใน ERP</li><li>โอนย้ายตู้ในระบบและเติม 0.01 ลิตร</li><li>จัดซื้อสร้าง Item Code</li><li>เติมน้ำมัน ติดตั้ง ทดสอบ ตั้งราคา และส่งมอบ</li></ul></div><div><h4>ระบบ/เครื่องมือ</h4><span class="tag">ERP</span><span class="tag">Item Master</span><span class="tag">Field Evidence</span></div><div><h4>สิ่งที่ต้องจำ</h4><p>ระบบกับของจริงต้องตรงกัน</p></div></div></article><article id="p5" class="detail"><div class="head operation"><div class="no">05</div><div><small>OPERATION</small><h3>Advance เพื่อซื้อน้ำมัน</h3><small>บัญชี / Head Project</small></div></div><div class="body"><div><h4>ขั้นตอน</h4><ul><li>เบิก Advance</li><li>อนุมัติ</li><li>ซื้อน้ำมัน</li><li>เติมเข้าตู้</li><li>ส่งเอกสาร</li><li>เคลียร์ค่าใช้จ่าย</li></ul></div><div><h4>ระบบ/เครื่องมือ</h4><span class="tag">Finance</span><span class="tag">ERP</span></div><div><h4>สิ่งที่ต้องจำ</h4><p>เงินยืมต้องมีเอกสารและติดตามการเคลียร์</p></div></div></article><article id="p6" class="detail"><div class="head operation"><div class="no">06</div><div><small>OPERATION</small><h3>ซื้อน้ำมันเข้าตู้</h3><small>ทีม PVM / บัญชี / จัดซื้อ</small></div></div><div class="body"><div><h4>ขั้นตอน</h4><ul><li>เติมน้ำมันเข้าตู้</li><li>บันทึก PVM Tracking</li><li>ส่งใบเสร็จ/เอกสารให้จัดซื้อ</li><li>บัญชีเคลียร์ Advance</li></ul></div><div><h4>ระบบ/เครื่องมือ</h4><span class="tag">PVM Tracking</span><span class="tag">Inventory</span></div><div><h4>สิ่งที่ต้องจำ</h4><p>Dr Inventory-Fuel / Cr Suspense Inventory AP Accrual</p></div></div></article><article id="p7" class="detail"><div class="head operation"><div class="no">07</div><div><small>OPERATION</small><h3>ขายและนำส่งรายได้</h3><small>ทีม PVM / ฝ่ายกำกับสาขา</small></div></div><div class="body"><div><h4>ขั้นตอน</h4><ul><li>ลูกค้าเติมน้ำมัน</li><li>POS บันทึกยอดขาย</li><li>สร้าง Task เก็บเงิน</li><li>นำส่งผ่าน QR</li><li>Match ยอด</li><li>Bank Reconcile</li></ul></div><div><h4>ระบบ/เครื่องมือ</h4><span class="tag">POS</span><span class="tag">QR</span><span class="tag">Bank</span><span class="tag">GL</span></div><div><h4>สิ่งที่ต้องจำ</h4><p>ขายเท่าไร เงินต้องเข้าบริษัทและ Match ได้</p></div></div></article><article id="p8" class="detail"><div class="head operation"><div class="no">08</div><div><small>OPERATION</small><h3>โอนย้ายน้ำมันระหว่างตู้</h3><small>ทีม PVM / บัญชี</small></div></div><div class="body"><div><h4>ขั้นตอน</h4><ul><li>ตรวจ Stock ต้นทาง/ปลายทาง</li><li>ขออนุมัติ</li><li>ขนย้าย</li><li>วัดก่อน-หลัง</li><li>บันทึกระบบ</li><li>บัญชีตรวจ Loss</li></ul></div><div><h4>ระบบ/เครื่องมือ</h4><span class="tag">PVM Tracking</span><span class="tag">Inventory</span></div><div><h4>สิ่งที่ต้องจำ</h4><p>Flow ระบุไม่ข้าม Area และต้องวัดก่อน-หลัง</p></div></div></article><article id="p9" class="detail"><div class="head operation"><div class="no">09</div><div><small>OPERATION</small><h3>โอนย้ายผู้ดูแลตู้น้ำมัน</h3><small>ทีม PVM / บัญชี</small></div></div><div class="body"><div><h4>ขั้นตอน</h4><ul><li>ตรวจนับ Stock</li><li>สรุปเงินคงเหลือ</li><li>ส่งมอบและลงนาม</li><li>อัปเดตระบบ</li></ul></div><div><h4>ระบบ/เครื่องมือ</h4><span class="tag">PVM Tracking</span><span class="tag">Hand Over</span></div><div><h4>สิ่งที่ต้องจำ</h4><p>ต้องมี Hand Over Form และยอด ณ จุดส่งมอบ</p></div></div></article><article id="p10" class="detail"><div class="head settlement"><div class="no">10</div><div><small>SETTLEMENT</small><h3>ยกเลิกสัญญา</h3><small>ทีม PVM / บัญชี</small></div></div><div class="body"><div><h4>ขั้นตอน</h4><ul><li>นับ Stock และโอนไปตู้อื่น</li><li>สรุปเงินคงเหลือ</li><li>แจ้งเจ้าของพื้นที่</li><li>ขนย้ายตู้</li><li>ปิด PVM Tracking</li><li>ย้าย Location กลับส่วนกลาง</li></ul></div><div><h4>ระบบ/เครื่องมือ</h4><span class="tag">PVM Tracking</span><span class="tag">ERP Asset</span></div><div><h4>สิ่งที่ต้องจำ</h4><p>ปิด Contract + Stock + Cash + Asset ให้ครบ</p></div></div></article><article id="p11" class="detail"><div class="head settlement"><div class="no">11</div><div><small>SETTLEMENT</small><h3>ค่าตอบแทนเจ้าของพื้นที่และ WHT</h3><small>Head Project / SCM / IT / บัญชี / การเงิน</small></div></div><div class="body"><div><h4>ขั้นตอน</h4><ul><li>IT ดึง Sales</li><li>คำนวณยอดขาย/ปริมาณ/ค่าตอบแทน</li><li>Head Project ยืนยัน</li><li>SCM ขออนุมัติใน Alfresco</li><li>IT ออก E-WHT</li><li>บัญชีตั้งหนี้</li><li>การเงินจ่าย</li></ul></div><div><h4>ระบบ/เครื่องมือ</h4><span class="tag">POS</span><span class="tag">Alfresco</span><span class="tag">E-WHT</span><span class="tag">ERP</span></div><div><h4>สิ่งที่ต้องจำ</h4><p>Commission → AP → Cash Clearing → Bank</p></div></div></article>
+<!doctype html>
+<html lang="th">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>SINGER PVM Training Book</title>
+<style>
+:root{
+  --paper:#F5F2EB;--sheet:#FFFDF8;--ink:#20201E;--muted:#6E6962;--line:#D8D1C6;
+  --rust:#B64C36;--rust2:#8E392B;--dark:#292927;--gray:#5E5A54;--soft:#EEE9E1;
+  --shadow:0 16px 50px rgba(30,28,25,.08);
+}
+*{box-sizing:border-box}
+html,body{margin:0;min-height:100%;background:var(--paper);color:var(--ink);font-family:Tahoma,"Noto Sans Thai","Sarabun",sans-serif}
+body{overflow-x:hidden}
+a{color:inherit}
+.topbar{position:sticky;top:0;z-index:50;background:rgba(32,32,30,.98);color:#fff;border-bottom:1px solid #44433f}
+.topinner{max-width:1500px;margin:auto;padding:11px 20px;display:flex;align-items:center;gap:16px}
+.brand{font-weight:900;letter-spacing:.06em;white-space:nowrap}.brand span{color:#D86A51}
+.topnav{display:flex;gap:6px;flex-wrap:wrap}.topnav button{background:transparent;border:1px solid #5c5954;color:#fff;border-radius:999px;padding:7px 10px;font-size:12px;cursor:pointer}
+.topnav button:hover{background:var(--rust);border-color:var(--rust)}
+.spacer{flex:1}.counter{font-size:12px;color:#d9d6d0;white-space:nowrap}
+.progress{height:3px;background:#3b3935}.progress>div{height:100%;width:0;background:var(--rust);transition:.25s}
+.stage{max-width:1500px;margin:0 auto;padding:24px 20px 92px}
+.page{display:none;min-height:calc(100vh - 155px);background:var(--sheet);border:1px solid var(--line);box-shadow:var(--shadow);padding:42px}
+.page.active{display:block}
+.eyebrow{font-size:11px;letter-spacing:.13em;text-transform:uppercase;font-weight:900;color:var(--muted)}
+h1{font-size:clamp(38px,5vw,68px);line-height:1.04;letter-spacing:-.03em;margin:9px 0 16px}
+h2{font-size:30px;margin:0 0 18px} h3{margin:0 0 8px;font-size:20px}
+p{line-height:1.7}.lead{font-size:18px;color:var(--muted);max-width:1050px}.accent{color:var(--rust)}
+.grid{display:grid;gap:12px}.g4{grid-template-columns:repeat(4,1fr)}.g3{grid-template-columns:repeat(3,1fr)}.g2{grid-template-columns:1fr 1fr}
+.card{background:#fff;border:1px solid var(--line);padding:18px}.card .k{font-size:11px;color:var(--rust);font-weight:900;letter-spacing:.08em}.card p{font-size:13px;color:var(--muted);margin:5px 0 0}
+.phasebar{display:grid;grid-template-columns:3fr 2fr 5fr 2fr;margin:20px 0}.phase{padding:14px 16px;color:#fff}.contract{background:var(--dark)}.install{background:var(--gray)}.operation{background:var(--rust)}.settlement{background:var(--rust2)}
+.phase b{display:block}.phase small{opacity:.86}
+.workflow{display:grid;grid-template-columns:repeat(11,minmax(150px,1fr));gap:7px;overflow-x:auto;padding-bottom:7px}
+.wstep{min-width:150px;min-height:150px;color:#fff;padding:13px;text-decoration:none;display:flex;flex-direction:column;gap:7px;cursor:pointer}
+.wstep:hover{transform:translateY(-2px)}.wstep .num{width:29px;height:29px;border-radius:50%;background:#ffffff2d;display:grid;place-items:center;font-weight:900}.wstep small{margin-top:auto;opacity:.85}
+.note{border-left:5px solid var(--rust);background:#FFF5EF;padding:14px 16px;margin:15px 0;font-size:13px}
+.process-top{display:grid;grid-template-columns:1.1fr .9fr;gap:18px;margin-top:18px}
+.process-title{background:#fff;border:1px solid var(--line);padding:22px}.process-title .stepbig{font-size:58px;font-weight:900;line-height:1;color:var(--rust)}
+.remember{background:var(--dark);color:#fff;padding:22px}.remember small{opacity:.7}.remember strong{display:block;font-size:24px;line-height:1.4;margin-top:8px}
+.columns{display:grid;grid-template-columns:1.25fr 1fr 1fr;gap:12px;margin-top:14px}.box{background:#fff;border:1px solid var(--line);padding:18px}.box h4{margin:0 0 10px;font-size:12px;text-transform:uppercase;letter-spacing:.07em;color:var(--muted)}
+.box ol,.box ul{margin:0;padding-left:20px;font-size:13px}.box li{margin:6px 0}.tags{display:flex;flex-wrap:wrap;gap:6px}.tag{border:1px solid var(--line);padding:5px 8px;border-radius:999px;font-size:11px;background:#faf7f1}
+.account{background:#F1EDE6;border-left:4px solid var(--rust);padding:13px;font-size:12px;white-space:pre-line}
+table{width:100%;border-collapse:collapse;background:#fff;font-size:12px;margin:10px 0 18px}th,td{border:1px solid var(--line);padding:9px;text-align:left;vertical-align:top}th{background:var(--soft)}
+.legend{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}.legend strong{font-size:28px;color:var(--rust)}
+.docgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}.doc{background:#fff;border:1px solid var(--line);padding:17px}.doc b{display:block;margin-bottom:5px}.doc small{color:var(--muted)}
+.bottomnav{position:fixed;left:0;right:0;bottom:0;z-index:60;background:rgba(245,242,235,.96);backdrop-filter:blur(8px);border-top:1px solid var(--line)}
+.bottominner{max-width:1500px;margin:auto;padding:10px 20px;display:grid;grid-template-columns:1fr auto 1fr;gap:10px;align-items:center}
+.btn{border:1px solid var(--ink);background:var(--sheet);padding:10px 14px;cursor:pointer;font-weight:700;font-size:12px}.btn.primary{background:var(--ink);color:#fff}.btn.next{justify-self:end}.btn:disabled{opacity:.35;cursor:not-allowed}
+.pills{display:flex;gap:4px;align-items:center;justify-content:center;flex-wrap:wrap}.pill{width:8px;height:8px;border-radius:50%;border:1px solid #928c84;background:transparent;cursor:pointer}.pill.active{background:var(--rust);border-color:var(--rust);transform:scale(1.25)}
+.page-label{font-size:11px;color:var(--muted);text-align:center;margin-top:8px}
+.kbd{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;background:#eee8df;border:1px solid var(--line);padding:2px 5px;border-radius:4px;font-size:11px}
+@media(max-width:1000px){.g4,.g3,.docgrid{grid-template-columns:1fr 1fr}.columns,.process-top{grid-template-columns:1fr}.page{padding:28px}}
+@media(max-width:650px){.g4,.g3,.g2,.legend,.docgrid,.columns{grid-template-columns:1fr}.page{padding:20px}.stage{padding:12px 10px 92px}.topinner{padding:10px}.topnav{display:none}.counter{font-size:10px}.bottominner{padding:9px 10px}.phasebar{grid-template-columns:1fr 1fr}.btn{padding:9px 10px}}
+@media print{.topbar,.bottomnav{display:none}.stage{padding:0}.page{display:block!important;min-height:auto;box-shadow:none;page-break-after:always;border:0}}
+</style>
+</head>
+<body>
+<header class="topbar">
+  <div class="topinner">
+    <div class="brand">SINGER <span>· PVM TRAINING</span></div>
+    <div class="topnav">
+      <button data-goto="1">Overview</button>
+      <button data-goto="2">Workflow</button>
+      <button data-goto="14">DOA</button>
+      <button data-goto="15">Documents</button>
+    </div>
+    <div class="spacer"></div>
+    <div class="counter" id="topCounter">01 / 15</div>
+  </div>
+  <div class="progress"><div id="progressBar"></div></div>
+</header>
+
+<main class="stage" id="stage">
+
+<section class="page" data-page="1" data-title="ภาพรวมโครงการ">
+  <div class="eyebrow">PAGE 01 · OVERVIEW</div>
+  <h1>เข้าใจโครงการ <span class="accent">ตู้น้ำมัน PVM</span></h1>
+  <p class="lead">บริษัทนำตู้น้ำมันไปติดตั้งในพื้นที่ที่ผ่านการพิจารณา ทำสัญญากับเจ้าของพื้นที่ เติมน้ำมันเพื่อจำหน่าย รับเงินจากลูกค้า บริหาร Stock/Asset/รายได้ และดำเนินการจนถึงการยกเลิกจุดติดตั้งและจ่ายค่าตอบแทนที่เกี่ยวข้อง</p>
+  <div class="phasebar">
+    <div class="phase contract"><b>CONTRACT</b><small>สำรวจ · เบิกตู้ · ทำสัญญา</small></div>
+    <div class="phase install"><b>INSTALLATION</b><small>Location · ติดตั้ง · ทดสอบ</small></div>
+    <div class="phase operation"><b>OPERATION</b><small>Advance · Fuel · Sales · Transfer · Hand Over</small></div>
+    <div class="phase settlement"><b>SETTLEMENT</b><small>ยกเลิก · Commission · WHT</small></div>
+  </div>
+  <div class="grid g4">
+    <div class="card"><div class="k">ASSET</div><h3>ตู้อยู่ที่ไหน?</h3><p>Serial, Asset Register, ERP Location และจุดติดตั้งจริงต้องเชื่อมโยงกัน</p></div>
+    <div class="card"><div class="k">FUEL</div><h3>น้ำมันเหลือเท่าไร?</h3><p>ซื้อ เติม ขาย โอน และ Loss ต้องสามารถติดตามย้อนหลังได้</p></div>
+    <div class="card"><div class="k">REVENUE</div><h3>ขายแล้วได้เงินครบไหม?</h3><p>POS → QR → Match → Bank → GL ต้องกระทบยอดกันได้</p></div>
+    <div class="card"><div class="k">CONTRACT</div><h3>เริ่ม–จบครบไหม?</h3><p>Contract, Stock, Cash, Asset Location, Commission และ WHT ต้องปิดครบ</p></div>
+  </div>
+  <div class="note"><b>วิธีใช้คู่มือนี้:</b> เริ่มจากหน้า Workflow แล้วกดเข้า Process ที่ต้องการเรียน จากนั้นใช้ปุ่ม “ก่อนหน้า / Workflow / ถัดไป” ด้านล่าง หรือกด <span class="kbd">←</span> <span class="kbd">→</span> บนคีย์บอร์ด</div>
 </section>
-<section id="doa" class="section"><h2>อำนาจอนุมัติที่เกี่ยวกับ PVM</h2><div class="legend"><div class="card"><strong>A</strong><b> Approval</b><p>ผู้มีอำนาจอนุมัติ</p></div><div class="card"><strong>V</strong><b> Verified</b><p>ผู้ตรวจสอบ/ทวนสอบ</p></div><div class="card"><strong>R</strong><b> Requested</b><p>ผู้จัดทำ/ผู้เสนอ</p></div></div><div class="notice"><b>สำคัญ:</b> DOA เป็นกรอบระดับบริษัท การเชื่อมด้านล่างยึดตาม “ประเภทธุรกรรม” ที่ตรงกับ Workflow และต้องตรวจเอกสารต้นฉบับเมื่ออนุมัติรายการจริง</div>
-<h3>สัญญากับเจ้าของพื้นที่ — Step 3</h3><table><tr><th>Role</th><th>ระดับ</th></tr><tr><td>A</td><td>CEO</td></tr><tr><td>V</td><td>CFO, C Level และ Grade 8</td></tr><tr><td>R</td><td>Grade 7 และ Grade 6</td></tr></table><p><small>DOA หน้า 9 — การทำสัญญา/ลงนามกับบุคคลภายนอก</small></p>
-<h3>ซื้อสินทรัพย์/เครื่องมือ/อุปกรณ์ — Step 2 และ 4</h3><table><tr><th>วงเงิน</th><th>A</th><th>V</th><th>R</th></tr><tr><td>≤ 10 ล้านบาท</td><td>CEO + CFO ร่วม</td><td>C Level</td><td>Grade 8/7/6</td></tr><tr><td>≤ 30 ล้านบาท</td><td>CEO</td><td>CFO + C Level</td><td>Grade 8/7/6</td></tr><tr><td>≤ 50 ล้านบาท</td><td>Ex Com</td><td>CEO + CFO + C Level</td><td>Grade 8/7/6</td></tr><tr><td>> 50 ล้านบาท</td><td>Board + Ex Com</td><td>CEO + CFO + C Level</td><td>Grade 8/7/6</td></tr></table><p><small>DOA หน้า 12 — Fixed Asset; ให้จัดทำ Appropriation Request (AR) ต่อครั้ง/ต่อโครงการ</small></p>
-<h3>ยืมเงินทดรองจ่าย — Step 5</h3><table><tr><th>วงเงินต่อครั้ง/ต่อคน</th><th>A</th><th>V</th><th>R</th></tr><tr><td>≤ 50,000 บาท</td><td>Grade 8</td><td>Grade 6</td><td>Grade 3</td></tr><tr><td>50,000–300,000 บาท</td><td>C Level</td><td>Grade 6</td><td>Grade 3</td></tr><tr><td>> 300,000 บาท</td><td>CEO</td><td>Grade 6</td><td>Grade 3</td></tr></table><p><small>DOA หน้า 23–24 — การยืมเงินทดรองจ่าย</small></p></section>
-<section id="sources" class="section"><h2>แหล่งข้อมูล</h2><div class="grid g3"><div class="card"><b>SOP PVM 57 หน้า</b><p>สัญญา, Site Assessment, Asset, Advance, การตั้งค่าตู้, เก็บเงิน, ซ่อม และ Permit</p></div><div class="card"><b>Flow Project + Accounting</b><p>แกนหลัก 11 Process, หน่วยงาน, ระบบ และ Accounting Entry</p></div><div class="card"><b>DOA 5 Apr 2024</b><p>กรอบ A/V/R สำหรับ Contract, Fixed Asset และ Advance ที่เกี่ยวข้อง</p></div></div><div class="notice">หน้านี้เป็น Training Summary ไม่ใช้แทน SOP / Workflow / DOA ต้นฉบับในการอนุมัติรายการจริง</div></section></main><div class="footer">SINGER PVM Training Portal · Static HTML</div></body></html>
+
+<section class="page" data-page="2" data-title="Workflow รวม">
+  <div class="eyebrow">PAGE 02 · END-TO-END WORKFLOW</div>
+  <h1>Workflow รวม <span class="accent">11 ขั้นตอน</span></h1>
+  <p class="lead">กดแต่ละ Step เพื่อเปิดหน้ารายละเอียดของ Process นั้นทันที</p>
+  <div class="workflow">
+    <a class="wstep contract" data-goto="3"><span class="num">01</span><b>สำรวจพื้นที่</b><small>ทีม PVM</small></a>
+    <a class="wstep contract" data-goto="4"><span class="num">02</span><b>เบิกตู้น้ำมัน PVM</b><small>บัญชี / SCM / PVM</small></a>
+    <a class="wstep contract" data-goto="5"><span class="num">03</span><b>ทำสัญญาเจ้าของพื้นที่</b><small>ทีม PVM</small></a>
+    <a class="wstep install" data-goto="6"><span class="num">04</span><b>ติดตั้งตู้น้ำมัน</b><small>บัญชี / จัดซื้อ / PVM</small></a>
+    <a class="wstep operation" data-goto="7"><span class="num">05</span><b>Advance ซื้อน้ำมัน</b><small>บัญชี / Head Project</small></a>
+    <a class="wstep operation" data-goto="8"><span class="num">06</span><b>ซื้อน้ำมันเข้าตู้</b><small>PVM / บัญชี / จัดซื้อ</small></a>
+    <a class="wstep operation" data-goto="9"><span class="num">07</span><b>ขายและนำส่งรายได้</b><small>PVM / กำกับสาขา</small></a>
+    <a class="wstep operation" data-goto="10"><span class="num">08</span><b>โอนย้ายน้ำมัน</b><small>PVM / บัญชี</small></a>
+    <a class="wstep operation" data-goto="11"><span class="num">09</span><b>เปลี่ยนผู้ดูแล</b><small>PVM / บัญชี</small></a>
+    <a class="wstep settlement" data-goto="12"><span class="num">10</span><b>ยกเลิกสัญญา</b><small>PVM / บัญชี</small></a>
+    <a class="wstep settlement" data-goto="13"><span class="num">11</span><b>ค่าตอบแทน + WHT</b><small>Project / SCM / IT / Finance</small></a>
+  </div>
+  <div class="note"><b>เส้นข้อมูลหลักที่ต้องเชื่อมกัน:</b> Owner/Contract → Asset/Location → Fuel Inventory → POS/Revenue → QR/Bank → GL → Commission/WHT → Contract Closure</div>
+  <div class="grid g3">
+    <div class="card"><div class="k">ASSET ↔ PHYSICAL</div><h3>ของจริงต้องตรงระบบ</h3><p>Serial / ERP Location / PVM Tracking / จุดติดตั้ง</p></div>
+    <div class="card"><div class="k">FUEL ↔ SALES</div><h3>Stock ต้องอธิบายได้</h3><p>ซื้อ + โอนเข้า − ขาย − โอนออก ± Loss</p></div>
+    <div class="card"><div class="k">SALES ↔ CASH</div><h3>ยอดขายต้องกลายเป็นเงิน</h3><p>POS ↔ QR ↔ Bank ↔ GL</p></div>
+  </div>
+</section>
+
+<section class="page" data-page="3" data-title="01 สำรวจพื้นที่">
+  <div class="eyebrow">PAGE 03 · PROCESS 01 · CONTRACT</div>
+  <div class="process-top"><div class="process-title"><div class="stepbig">01</div><h1>สำรวจพื้นที่</h1><p class="lead">Owner: ทีม PVM</p></div><div class="remember"><small>จำง่าย ๆ</small><strong>“ทำเลต้องผ่านการประเมินก่อนเริ่มสัญญา”</strong></div></div>
+  <div class="columns">
+    <div class="box"><h4>ทำอะไร</h4><ol><li>สำรวจพื้นที่</li><li>เก็บข้อมูลเจ้าของพื้นที่</li><li>ประเมินศักยภาพทำเล</li><li>ติดต่อเจ้าของพื้นที่เพื่อขอติดตั้งตู้</li></ol></div>
+    <div class="box"><h4>เอกสาร / หลักฐาน</h4><div class="tags"><span class="tag">Checklist ประเมินพื้นที่</span><span class="tag">ภาพ/หลักฐาน Location</span><span class="tag">ข้อมูลเจ้าของพื้นที่</span></div></div>
+    <div class="box"><h4>จุดควบคุม</h4><ul><li>ใช้เกณฑ์ประเมินพื้นที่ก่อนดำเนินการต่อ</li><li>ข้อมูล Location ต้องสามารถนำไปเชื่อมกับสัญญาและ Asset ได้</li></ul></div>
+  </div>
+</section>
+
+<section class="page" data-page="4" data-title="02 เบิกตู้น้ำมัน PVM">
+  <div class="eyebrow">PAGE 04 · PROCESS 02 · CONTRACT</div>
+  <div class="process-top"><div class="process-title"><div class="stepbig">02</div><h1>เบิกตู้น้ำมัน PVM</h1><p class="lead">Owner: บัญชี / SCM / ทีม PVM</p></div><div class="remember"><small>จำง่าย ๆ</small><strong>“ตู้ที่เบิกต้องรู้ Serial และต้องรู้ว่าจะไปอยู่ที่ Location ไหน”</strong></div></div>
+  <div class="columns">
+    <div class="box"><h4>ทำอะไร</h4><ol><li>เบิก Advance ที่เกี่ยวข้องกับการติดตั้ง</li><li>ทีม PVM แจ้ง Head Project</li><li>SCM ตรวจสอบ Asset คงเหลือ</li><li>หากจำนวนไม่เพียงพอให้ดำเนินการ Drop Fixed Asset ตาม Flow</li></ol></div>
+    <div class="box"><h4>ระบบ</h4><div class="tags"><span class="tag">ERP</span><span class="tag">Asset</span><span class="tag">Finance</span></div><div class="note"><b>ตาม Flow:</b> ฝ่ายบัญชีติดตามการเคลียร์ Advance ภายใน 30 วัน</div></div>
+    <div class="box"><h4>Accounting</h4><div class="account">Dr 1709113 MACHINERY CLEARING
+Cr 1401003 INVENTORY - GRADE B
+
+Dr 1701013 MACHINERY
+Cr 1709113 MACHINERY CLEARING</div></div>
+  </div>
+</section>
+
+<section class="page" data-page="5" data-title="03 ทำสัญญาเจ้าของพื้นที่">
+  <div class="eyebrow">PAGE 05 · PROCESS 03 · CONTRACT</div>
+  <div class="process-top"><div class="process-title"><div class="stepbig">03</div><h1>ทำสัญญาเจ้าของพื้นที่</h1><p class="lead">Owner: ทีม PVM</p></div><div class="remember"><small>จำง่าย ๆ</small><strong>“Owner + Contract + Location ต้องเป็นข้อมูลชุดเดียวกัน”</strong></div></div>
+  <div class="columns">
+    <div class="box"><h4>ทำอะไร</h4><ol><li>จัดทำและลงนาม Owner Contract</li><li>กรอกแบบขอเปิดสัญญาพื้นที่ใหม่</li><li>บันทึกข้อมูลใน PVM Tracking</li></ol></div>
+    <div class="box"><h4>เอกสารจาก SOP</h4><div class="tags"><span class="tag">สัญญาอนุญาตให้ใช้สถานที่</span><span class="tag">แบบขอเปิดสัญญาพื้นที่</span><span class="tag">Checklist ความถูกต้องสัญญา</span></div></div>
+    <div class="box"><h4>DOA ที่เกี่ยวข้อง</h4><p>สัญญากับบุคคลภายนอก: ใช้กรอบอำนาจอนุมัติหน้า 9 ของ DOA และตรวจผู้ Request / Verify / Approve ตามต้นฉบับ</p></div>
+  </div>
+</section>
+
+<section class="page" data-page="6" data-title="04 ติดตั้งตู้น้ำมัน">
+  <div class="eyebrow">PAGE 06 · PROCESS 04 · INSTALLATION</div>
+  <div class="process-top"><div class="process-title"><div class="stepbig">04</div><h1>ติดตั้งตู้น้ำมัน</h1><p class="lead">Owner: บัญชี / จัดซื้อ / ทีม PVM</p></div><div class="remember"><small>จำง่าย ๆ</small><strong>“ระบบกับของจริงต้องตรงกัน ก่อนเปิดขาย”</strong></div></div>
+  <div class="columns">
+    <div class="box"><h4>ทำอะไร</h4><ol><li>บัญชีสร้าง Location และโอนย้ายตู้ใน ERP</li><li>เติมน้ำมัน 0.01 ลิตรในระบบตาม Flow</li><li>จัดซื้อสร้าง Item Code</li><li>PVM เติมน้ำมันเข้าตู้</li><li>ติดตั้ง ทดสอบ ตั้งค่ารวมถึงราคาขาย</li><li>ส่งมอบผู้ดูแล</li></ol></div>
+    <div class="box"><h4>หลักฐาน</h4><div class="tags"><span class="tag">Email อนุมัติ</span><span class="tag">Excel จุดติดตั้ง</span><span class="tag">Timestamp Photo</span><span class="tag">Installation Evidence</span></div></div>
+    <div class="box"><h4>Control</h4><ul><li>ERP Location + Serial + จุดติดตั้งจริงต้องสัมพันธ์กัน</li><li>ต้องมีหลักฐานการติดตั้ง/ทดสอบ/ตั้งค่า</li></ul></div>
+  </div>
+</section>
+
+<section class="page" data-page="7" data-title="05 Advance ซื้อน้ำมัน">
+  <div class="eyebrow">PAGE 07 · PROCESS 05 · OPERATION</div>
+  <div class="process-top"><div class="process-title"><div class="stepbig">05</div><h1>Advance เพื่อซื้อน้ำมัน</h1><p class="lead">Owner: บัญชี / Head Project</p></div><div class="remember"><small>จำง่าย ๆ</small><strong>“ยืมเงิน → ซื้อจริง → มีหลักฐาน → เคลียร์ให้ครบ”</strong></div></div>
+  <div class="columns">
+    <div class="box"><h4>ทำอะไร</h4><ol><li>เบิก Advance</li><li>ขออนุมัติ</li><li>ซื้อน้ำมัน</li><li>เติมเข้าตู้</li><li>รวบรวมหลักฐาน</li><li>เคลียร์ Advance</li></ol></div>
+    <div class="box"><h4>เอกสาร</h4><div class="tags"><span class="tag">PV</span><span class="tag">ใบเสร็จ/ใบกำกับภาษี</span><span class="tag">รายละเอียดปริมาณ/ราคา</span><span class="tag">หลักฐานเติมน้ำมัน</span></div></div>
+    <div class="box"><h4>DOA</h4><p>วงเงิน Advance ต่อครั้ง/ต่อคนให้ตรวจตาม DOA หน้า 23–24</p><div class="note">≤ 50,000 / 50,000–300,000 / > 300,000 บาท ใช้ระดับอนุมัติต่างกัน</div></div>
+  </div>
+</section>
+
+<section class="page" data-page="8" data-title="06 ซื้อน้ำมันเข้าตู้">
+  <div class="eyebrow">PAGE 08 · PROCESS 06 · OPERATION</div>
+  <div class="process-top"><div class="process-title"><div class="stepbig">06</div><h1>ซื้อน้ำมันเข้าตู้</h1><p class="lead">Owner: ทีม PVM / บัญชี / จัดซื้อ</p></div><div class="remember"><small>จำง่าย ๆ</small><strong>“ซื้อมากี่ลิตร ต้องรู้ว่าเติมเข้าตู้ไหน และเข้าระบบเท่าไร”</strong></div></div>
+  <div class="columns">
+    <div class="box"><h4>ทำอะไร</h4><ol><li>เติมน้ำมันเข้าตู้</li><li>บันทึกใน PVM Tracking</li><li>ส่งเอกสารตรวจเช็กน้ำมันและใบเสร็จให้จัดซื้อ</li><li>จัดซื้อตรวจสอบ</li><li>บัญชีเคลียร์ Advance</li></ol></div>
+    <div class="box"><h4>ระบบ</h4><div class="tags"><span class="tag">PVM Tracking</span><span class="tag">ERP Inventory</span></div><p>ปริมาณซื้อ/เติม/บันทึก Inventory ต้องสัมพันธ์กัน</p></div>
+    <div class="box"><h4>Accounting</h4><div class="account">Dr 1401024 INVENTORY - FUEL
+Cr 2201008 SUSPENSE INVENTORY AP ACCRUAL</div></div>
+  </div>
+</section>
+
+<section class="page" data-page="9" data-title="07 ขายและนำส่งรายได้">
+  <div class="eyebrow">PAGE 09 · PROCESS 07 · OPERATION</div>
+  <div class="process-top"><div class="process-title"><div class="stepbig">07</div><h1>ขายและนำส่งรายได้</h1><p class="lead">Owner: ทีม PVM / ฝ่ายกำกับสาขา</p></div><div class="remember"><small>จำง่าย ๆ</small><strong>“ขายเท่าไร เงินต้องเข้าบริษัทเท่านั้น และ Match ได้”</strong></div></div>
+  <div class="columns">
+    <div class="box"><h4>ทำอะไร</h4><ol><li>ลูกค้าเติมน้ำมัน</li><li>POS บันทึกยอดขาย</li><li>สร้าง Task งานเก็บเงิน</li><li>นำส่งผ่าน QR Code</li><li>ฝ่ายกำกับสาขา Match ยอด</li><li>Bank Reconcile</li></ol></div>
+    <div class="box"><h4>เส้นทางข้อมูล</h4><div class="tags"><span class="tag">POS</span><span class="tag">PVM Tracking</span><span class="tag">QR</span><span class="tag">Bank</span><span class="tag">GL</span></div><div class="note">POS → QR → Bank → GL ต้องสามารถกระทบยอดกันได้</div></div>
+    <div class="box"><h4>Accounting</h4><div class="account">Cash in Transit + Fuel Revenue + VAT Output
+Fuel Expense / Inventory-Fuel
+Cash Clearing / Bank
+Cash Under Remitted (กรณีขาด)</div></div>
+  </div>
+</section>
+
+<section class="page" data-page="10" data-title="08 โอนย้ายน้ำมัน">
+  <div class="eyebrow">PAGE 10 · PROCESS 08 · OPERATION</div>
+  <div class="process-top"><div class="process-title"><div class="stepbig">08</div><h1>โอนย้ายน้ำมันระหว่างตู้</h1><p class="lead">Owner: ทีม PVM / บัญชี</p></div><div class="remember"><small>จำง่าย ๆ</small><strong>“ก่อนย้าย–หลังย้าย ต้องรู้ปริมาณ และต้องรู้ Loss”</strong></div></div>
+  <div class="columns">
+    <div class="box"><h4>ทำอะไร</h4><ol><li>ตรวจ Stock ต้นทาง/ปลายทาง</li><li>ขออนุมัติ</li><li>ขนย้าย</li><li>วัดปริมาณก่อน–หลัง</li><li>บันทึกการโอน</li><li>บัญชีตรวจ Loss</li></ol></div>
+    <div class="box"><h4>เงื่อนไขจาก Flow</h4><div class="note"><b>ไม่ข้าม Area</b></div><p>ควรมีหลักฐานการวัดและบันทึกต้นทาง/ปลายทางครบ</p></div>
+    <div class="box"><h4>Accounting</h4><div class="account">ตู้โอนออก:
+Dr Fuel Expense
+Cr Inventory-Fuel
+
+ตู้รับโอน:
+Dr Inventory-Fuel
+Cr Fuel Expense</div></div>
+  </div>
+</section>
+
+<section class="page" data-page="11" data-title="09 เปลี่ยนผู้ดูแล">
+  <div class="eyebrow">PAGE 11 · PROCESS 09 · OPERATION</div>
+  <div class="process-top"><div class="process-title"><div class="stepbig">09</div><h1>โอนย้ายผู้ดูแลตู้น้ำมัน</h1><p class="lead">Owner: ทีม PVM / บัญชี</p></div><div class="remember"><small>จำง่าย ๆ</small><strong>“เปลี่ยนคนดูแล ต้องรู้ Stock และเงิน ณ จุดส่งมอบ”</strong></div></div>
+  <div class="columns">
+    <div class="box"><h4>ทำอะไร</h4><ol><li>ตรวจนับ Stock</li><li>สรุปยอดเงินคงเหลือ</li><li>ส่งมอบงานและลงนามเอกสารรับ–ส่ง</li><li>อัปเดตข้อมูลในระบบ</li></ol></div>
+    <div class="box"><h4>เอกสาร</h4><div class="tags"><span class="tag">Hand Over Form</span><span class="tag">Stock Count</span><span class="tag">Cash Balance</span></div></div>
+    <div class="box"><h4>Control</h4><p>Flow ระบุชัดว่า <b>ต้องจัดทำแบบฟอร์ม Hand Over</b> เพื่อรองรับการรับ–ส่ง</p></div>
+  </div>
+</section>
+
+<section class="page" data-page="12" data-title="10 ยกเลิกสัญญา">
+  <div class="eyebrow">PAGE 12 · PROCESS 10 · SETTLEMENT</div>
+  <div class="process-top"><div class="process-title"><div class="stepbig">10</div><h1>ยกเลิกสัญญา</h1><p class="lead">Owner: ทีม PVM / บัญชี</p></div><div class="remember"><small>จำง่าย ๆ</small><strong>“ปิด Contract + Stock + Cash + Asset ให้ครบ”</strong></div></div>
+  <div class="columns">
+    <div class="box"><h4>ทำอะไร</h4><ol><li>ตรวจนับ Stock และโอนน้ำมันไปตู้อื่น</li><li>สรุปยอดเงินคงเหลือ</li><li>แจ้งเจ้าของพื้นที่</li><li>ขนย้ายตู้ออกจากพื้นที่</li><li>ปิดสัญญาใน PVM Tracking</li><li>บัญชีย้าย Location กลับส่วนกลาง</li></ol></div>
+    <div class="box"><h4>ระบบ</h4><div class="tags"><span class="tag">PVM Tracking</span><span class="tag">ERP Asset</span><span class="tag">Inventory</span></div></div>
+    <div class="box"><h4>จุดควบคุม</h4><ul><li>ต้องไม่มี Stock/เงินค้างที่จุดยกเลิกโดยไม่ทราบสถานะ</li><li>Asset Location ต้องกลับสู่สถานะที่ถูกต้อง</li></ul></div>
+  </div>
+</section>
+
+<section class="page" data-page="13" data-title="11 ค่าตอบแทนและ WHT">
+  <div class="eyebrow">PAGE 13 · PROCESS 11 · SETTLEMENT</div>
+  <div class="process-top"><div class="process-title"><div class="stepbig">11</div><h1>ค่าตอบแทนเจ้าของพื้นที่และ WHT</h1><p class="lead">Owner: Head Project / SCM / IT / บัญชี / การเงิน</p></div><div class="remember"><small>จำง่าย ๆ</small><strong>“ฐานขายถูก → อนุมัติถูก → WHT ถูก → จ่ายถูก”</strong></div></div>
+  <div class="columns">
+    <div class="box"><h4>ทำอะไร</h4><ol><li>IT ดึง Sales</li><li>คำนวณยอดขาย/ปริมาณ/ค่าตอบแทน</li><li>Head Project ยืนยัน</li><li>SCM จัดทำคำขออนุมัติใน Alfresco</li><li>IT Run E-WHT</li><li>บัญชีตั้งหนี้</li><li>การเงินจ่ายและเก็บหลักฐาน</li></ol></div>
+    <div class="box"><h4>ระบบ</h4><div class="tags"><span class="tag">POS / Sales</span><span class="tag">Alfresco</span><span class="tag">E-WHT</span><span class="tag">ERP / Finance</span></div></div>
+    <div class="box"><h4>Accounting</h4><div class="account">Dr 5418001 COMMISSION - PROJECT BRR
+Cr 2309013 AP EXPENSE
+
+Dr AP / Cr Cash Clearing
+Dr Cash Clearing / Cr Bank</div></div>
+  </div>
+</section>
+
+<section class="page" data-page="14" data-title="อำนาจอนุมัติที่เกี่ยวข้อง">
+  <div class="eyebrow">PAGE 14 · DELEGATION OF AUTHORITY</div>
+  <h1>อำนาจอนุมัติที่เกี่ยวกับ <span class="accent">PVM</span></h1>
+  <p class="lead">สรุปเฉพาะรายการที่เชื่อมกับ Workflow โดยยึด “ประเภทธุรกรรม” ของ DOA; เมื่อลงนาม/อนุมัติจริงต้องตรวจต้นฉบับ DOA อีกครั้ง</p>
+  <div class="legend"><div class="card"><strong>A</strong><h3>Approval</h3><p>ผู้มีอำนาจอนุมัติ</p></div><div class="card"><strong>V</strong><h3>Verified</h3><p>ผู้ตรวจสอบ/ทวนสอบ</p></div><div class="card"><strong>R</strong><h3>Requested</h3><p>ผู้จัดทำ/ผู้เสนอ</p></div></div>
+  <h3 style="margin-top:20px">1) สัญญากับเจ้าของพื้นที่ — Step 03</h3>
+  <table><tr><th>Role</th><th>ระดับ</th></tr><tr><td>A</td><td>CEO</td></tr><tr><td>V</td><td>CFO, C Level และ Grade 8</td></tr><tr><td>R</td><td>Grade 7 และ Grade 6</td></tr></table>
+  <h3>2) ซื้อสินทรัพย์/เครื่องมือ/อุปกรณ์ — Step 02 / 04</h3>
+  <table><tr><th>วงเงิน</th><th>A</th><th>V</th><th>R</th></tr><tr><td>≤ 10 ล้านบาท</td><td>CEO + CFO ร่วม</td><td>C Level</td><td>Grade 8/7/6</td></tr><tr><td>≤ 30 ล้านบาท</td><td>CEO</td><td>CFO + C Level</td><td>Grade 8/7/6</td></tr><tr><td>≤ 50 ล้านบาท</td><td>Ex Com</td><td>CEO + CFO + C Level</td><td>Grade 8/7/6</td></tr><tr><td>> 50 ล้านบาท</td><td>Board + Ex Com</td><td>CEO + CFO + C Level</td><td>Grade 8/7/6</td></tr></table>
+  <h3>3) ยืมเงินทดรองจ่าย — Step 05</h3>
+  <table><tr><th>วงเงินต่อครั้ง/ต่อคน</th><th>A</th><th>V</th><th>R</th></tr><tr><td>≤ 50,000 บาท</td><td>Grade 8</td><td>Grade 6</td><td>Grade 3</td></tr><tr><td>50,000–300,000 บาท</td><td>C Level</td><td>Grade 6</td><td>Grade 3</td></tr><tr><td>> 300,000 บาท</td><td>CEO</td><td>Grade 6</td><td>Grade 3</td></tr></table>
+  <div class="note">Fixed Asset: DOA ระบุให้จัดทำ <b>Appropriation Request (AR)</b> ต่อครั้ง / ต่อโครงการ</div>
+</section>
+
+<section class="page" data-page="15" data-title="เอกสารและตัวอย่าง">
+  <div class="eyebrow">PAGE 15 · DOCUMENTS & EXAMPLES</div>
+  <h1>เอกสาร / ตัวอย่าง <span class="accent">ที่ใช้สอนงาน</span></h1>
+  <p class="lead">หัวข้อต่อไปนี้ปรากฏใน SOP PVM 57 หน้าและใช้เป็นจุดอ้างอิงเมื่ออธิบายแต่ละ Process</p>
+  <div class="docgrid">
+    <div class="doc"><b>Owner Contract</b><small>ตัวอย่างสัญญาอนุญาตให้ใช้สถานที่ + แบบขอเปิดสัญญา + Checklist สัญญา</small></div>
+    <div class="doc"><b>Site Assessment</b><small>Checklist ประเมินความเหมาะสมของจุดติดตั้ง</small></div>
+    <div class="doc"><b>Asset Requisition</b><small>Email ขออนุมัติ + Excel รายการจุดติดตั้ง + Timestamp Photo</small></div>
+    <div class="doc"><b>Advance / Payment</b><small>PV + แบบเบิกค่าใช้จ่าย + ใบเสร็จ/ใบกำกับภาษี</small></div>
+    <div class="doc"><b>Fuel Purchase</b><small>รายละเอียดปริมาณ/ราคา + PV + เอกสารสถานีบริการ</small></div>
+    <div class="doc"><b>PVM Asset Database</b><small>Serial Number POS, Shop/Location, Fuel Type, Vendor และข้อมูล Asset</small></div>
+    <div class="doc"><b>Machine Setup</b><small>หน้าจอตั้งค่า ราคา วันเวลา และการทดสอบจ่ายน้ำมัน</small></div>
+    <div class="doc"><b>Cash Collection</b><small>Timestamp Camera + รายงานยอด + QR Code + Email แจ้งนำส่ง</small></div>
+    <div class="doc"><b>Repair / Maintenance</b><small>ตัวอย่างการแจ้งซ่อมและการดูแลตู้ระหว่างใช้งาน</small></div>
+    <div class="doc"><b>Government Permit</b><small>กระบวนการขออนุญาต/แจ้งการประกอบกิจการควบคุมประเภทที่ 2</small></div>
+    <div class="doc"><b>Workflow + Accounting</b><small>ใช้เป็นแกนหลักของ 11 Process, Owner, System และ Journal Entry</small></div>
+    <div class="doc"><b>Delegation of Authority</b><small>ใช้ตรวจ A / V / R สำหรับ Contract, Fixed Asset และ Advance ที่เกี่ยวข้อง</small></div>
+  </div>
+  <div class="note"><b>หมายเหตุ:</b> Training Book นี้ใช้เพื่ออธิบายภาพรวมและลำดับงาน ไม่ใช้แทน SOP / Workflow / DOA ต้นฉบับเมื่อต้องปฏิบัติหรืออนุมัติรายการจริง</div>
+</section>
+
+</main>
+
+<nav class="bottomnav">
+  <div class="bottominner">
+    <button class="btn" id="prevBtn">← ก่อนหน้า</button>
+    <div>
+      <div class="pills" id="pills"></div>
+      <div class="page-label"><span id="pageTitle">ภาพรวมโครงการ</span> · <button class="btn primary" id="workflowBtn" style="padding:5px 9px;margin-left:6px">กลับ Workflow</button></div>
+    </div>
+    <button class="btn next" id="nextBtn">ถัดไป →</button>
+  </div>
+</nav>
+
+<script>
+const total=15;
+let currentPage=1;
+const pages=[...document.querySelectorAll('.page')];
+const pills=document.getElementById('pills');
+for(let i=1;i<=total;i++){
+  const b=document.createElement('button'); b.className='pill'; b.title='หน้า '+i; b.dataset.goto=i; pills.appendChild(b);
+}
+function clamp(n){return Math.max(1,Math.min(total,n))}
+function showPage(n, push=true){
+  currentPage=clamp(Number(n)||1);
+  pages.forEach(p=>p.classList.toggle('active',Number(p.dataset.page)===currentPage));
+  document.querySelectorAll('.pill').forEach(p=>p.classList.toggle('active',Number(p.dataset.goto)===currentPage));
+  document.getElementById('prevBtn').disabled=currentPage===1;
+  document.getElementById('nextBtn').disabled=currentPage===total;
+  const active=pages.find(p=>Number(p.dataset.page)===currentPage);
+  document.getElementById('topCounter').textContent=String(currentPage).padStart(2,'0')+' / '+total;
+  document.getElementById('pageTitle').textContent=active?.dataset.title||'';
+  document.getElementById('progressBar').style.width=(currentPage/total*100)+'%';
+  if(push) history.replaceState(null,'','#page-'+currentPage);
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+document.addEventListener('click',e=>{
+  const g=e.target.closest('[data-goto]');
+  if(g){e.preventDefault();showPage(g.dataset.goto)}
+});
+document.getElementById('prevBtn').onclick=()=>showPage(currentPage-1);
+document.getElementById('nextBtn').onclick=()=>showPage(currentPage+1);
+document.getElementById('workflowBtn').onclick=()=>showPage(2);
+document.addEventListener('keydown',e=>{
+  if(e.key==='ArrowLeft') showPage(currentPage-1);
+  if(e.key==='ArrowRight') showPage(currentPage+1);
+  if(e.key==='Home') showPage(1);
+});
+const m=location.hash.match(/page-(\d+)/); showPage(m?m[1]:1,false);
+</script>
+</body>
+</html>
